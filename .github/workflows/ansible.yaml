@@ -1,0 +1,84 @@
+name: Test Action
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  remote:
+    runs-on: ubuntu-latest
+    env:
+      SSH_PRIVATE_KEY: |
+      SSH_PUBLIC_KEY: |
+    steps:
+      - name: With everything
+        uses: ./
+        with:
+          playbook: cluster.yaml
+          known_inventory.yaml: ${{env.SSH_KNOWN_HOSTS}}
+          directory: test
+          vault_password: test
+          requirements: requirements.yaml
+          inventory: |
+            [all]
+            localhost
+  local:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: With requirements
+        uses: ./
+        with:
+          playbook: cluster.yaml
+          directory: test
+          requirements: requirements.yaml
+          options: --inventory inventory.yaml
+      - name: With sudo
+        uses: ./
+        with:
+          playbook: cluster.yaml
+          directory: test
+          sudo: true
+          options: --inventory inventory.yaml
+
+name: deploy ansible
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@v2
+    - name: Lint Ansible Playbook
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: ""
+  deployAnsible:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      SSH_PRIVATE_KEY: |
+      SSH_PUBLIC_KEY: |
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    #- uses: ./.github/actions/ansible
+    - uses: ./
+      with: 
+        requirements: requirements.yaml
+        playbook: cluster.yaml
+        inventory: inventory.yaml 
+        sudo: true
+        # options: --inventory inventory.yaml
+        # key: ${{env.SSH_PRIVATE_KEY}}
