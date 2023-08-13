@@ -1,7 +1,0 @@
----
-roles:
-  # Install a collection from Ansible Galaxy.
-  - name: xanmanning.k3s
-    version: ">=v3.4.2"
-
-
