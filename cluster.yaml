@@ -3,7 +3,8 @@
   vars:
     k3s_become: true
     k3s_server:
-      default-local-storage-path: /opt/local-path-provisioner
+      default-local-storage-path: /opt/local-path-provisioner 
+      resolv-conf: /etc/resolv.conf
     # Deploy the following yamls:
     k3s_server_manifests_templates:
       - k8s/argocd-namespace.yaml

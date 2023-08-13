@@ -4,7 +4,7 @@ metadata:
   name: runner
   namespace: argocd
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
       repository: marcoslkz/ansible-k3s-install
