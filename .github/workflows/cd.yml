@@ -10,6 +10,7 @@ on:
 
 jobs:
   release:
+    environment: production
     #runs-on: ubuntu-latest
     #runs-on: k8s
     runs-on: self-hosted 
