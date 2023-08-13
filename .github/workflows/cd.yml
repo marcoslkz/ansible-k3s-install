@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       - uses: actions/checkout@v3
@@ -19,9 +20,10 @@ jobs:
       - name: Play Ansible Playbook
         uses: arillso/action.playbook@master
         with:
-          playbook: tests/playbook.yml
-          inventory: tests/hosts.yml
-          galaxy_file: tests/requirements.yml
+          playbook: cluster.yaml
+          inventory: inventory.yaml
+          galaxy_file: requirements.yaml
+          private_key: ${{ secrets.ANSIBLE_KEY  }}
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'false'
           ANSIBLE_DEPRECATION_WARNINGS: 'false'
