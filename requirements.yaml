@@ -2,5 +2,5 @@
 roles:
   # Install a collection from Ansible Galaxy.
   - name: xanmanning.k3s
-
+  - name: monolithprojects.github_actions_runner
 
