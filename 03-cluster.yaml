@@ -8,15 +8,13 @@
     # Deploy the following yamls:
     k3s_server_manifests_templates:
       - k8s/argocd-namespace.yaml
+      - k8s/argocd-install.yaml
       - k8s/argocd-ingressroute.yaml
     k3s_server_manifests_urls:
     - url: https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
       filename: cert-manager.yaml
     - url: https://raw.githubusercontent.com/marcoslkz/k8s-wireguard/main/wireguard-deployment.yaml
       filename: wireguard-deployment.yaml
-    - url: https://github.com/actions/actions-runner-controller/releases/download/v0.27.2/actions-runner-controller.yaml
-      filename: actions-runner-controller.yaml
-    - url: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   roles:
     - role: xanmanning.k3s
 
