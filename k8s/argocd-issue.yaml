@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+ name: le-example-dns
+ namespace: whoami
+spec:
+ acme:
+   email: user@example.com
+   # We use the staging server here for testing to avoid hitting
+   server: https://acme-staging-v02.api.letsencrypt.org/directory
+   privateKeySecretRef:
+     # if not existing, it will register a new account and stores it
+     name: example-issuer-account-key
+   solvers:
