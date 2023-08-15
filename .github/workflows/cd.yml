@@ -18,13 +18,12 @@ jobs:
       - name: Run a one-line script
         run: echo init
       - name: Play Ansible Playbook
-        uses: arillso/action.playbook@master
+        uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: cluster.yaml
           inventory: inventory.yaml
-          galaxy_file: requirements.yaml
-          private_key: ${{ secrets.ANSIBLE_KEY  }}
+          requirements: requirements.yaml
+          key: ${{ secrets.ANSIBLE_KEY  }}
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'false'
           ANSIBLE_DEPRECATION_WARNINGS: 'false'
-          
