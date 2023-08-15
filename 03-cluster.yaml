@@ -8,6 +8,7 @@
     # Deploy the following yamls:
     k3s_server_manifests_templates:
       - k8s/argocd-namespace.yaml
+      - k8s/letsencrypt.yaml
       - k8s/argocd-ingressroute.yaml
       - k8s/argocd-cmd-params-cm-patch.yml
     k3s_server_manifests_urls:
