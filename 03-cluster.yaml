@@ -8,7 +8,6 @@
     # Deploy the following yamls:
     k3s_server_manifests_templates:
       - k8s/argocd-namespace.yaml
-      - k8s/runner.yaml
     k3s_server_manifests_urls:
     - url: https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
       filename: cert-manager.yaml
