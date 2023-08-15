@@ -21,7 +21,9 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: cluster.yaml
-          inventory:  ${{ secrets.HOST_IP }}
+          inventory: |
+            [all]
+            ${{ secrets.HOST_IP }} ansible_user=opc
           requirements: requirements.yaml
           key: ${{ secrets.ANSIBLE_KEY  }}
         env:
