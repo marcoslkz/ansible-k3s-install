@@ -17,7 +17,7 @@ jobs:
       - name: Play Ansible Playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: 04-helm.yaml
+          playbook: cluster.yaml
           inventory: |
             [all]
             ${{ secrets.HOST_IP }} ansible_user=opc
