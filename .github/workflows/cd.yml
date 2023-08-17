@@ -15,6 +15,7 @@ jobs:
     runs-on: self-hosted 
     steps:
       #- uses: AutoModality/action-clean@v1
+      - uses: actions/checkout@v2
       - name: Play Ansible Playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
