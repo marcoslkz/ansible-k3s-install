@@ -2,14 +2,15 @@
 - name: Install Helm Charts
   hosts: all
   user: ansible
-  - name: Add stable chart repo 
-    kubernetes.core.helm_repository:
-  	  name:  external-secrets
-	    repo_url: https://charts.external-secrets.io
-	- name: Deploy helm external-secrets 
-  	kubernetes.core.helm:
-    	name: 
-	    chart_ref: external-secrets/external-secrets
+	tasks:
+ 	- name: Add stable chart repo
+ 		kubernetes.core.helm_repository:
+	 		name: external-secrets
+			repo_url: https://charts.external-secrets.io
+	- name: Deploy helm external-secrets
+ 		kubernetes.core.helm:
+	 		name: external-secrets
+			ansiblechart_ref: external-secrets/external-secrets
 	    release_namespace: external-secrets
 	    create_namespace: true
 
