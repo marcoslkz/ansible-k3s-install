@@ -1,8 +1,9 @@
 ---
 - name: Install Helm Charts
   hosts: all
-	- name: Add stable chart repo
-	  kubernetes.core.helm_repository:
+  user: ansible
+  - name: Add stable chart repo  k
+    ubernetes.core.helm_repository:
   	  name:  external-secrets
 	    repo_url: https://charts.external-secrets.io
 	- name: Deploy helm external-secrets 
