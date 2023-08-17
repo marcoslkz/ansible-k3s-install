@@ -10,6 +10,6 @@
     - name: Deploy helm external-secrets
       kubernetes.core.helm:
         name: external-secrets
-        ansiblechart_ref: external-secrets/external-secrets
+        chart_ref: external-secrets/external-secrets
         release_namespace: external-secrets
         create_namespace: true
