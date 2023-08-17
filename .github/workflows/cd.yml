@@ -9,6 +9,12 @@ on:
   workflow_dispatch:
 
 jobs:
+  build:
+    name: Ansible Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@main
   release:
     environment: production
     #runs-on: ubuntu-latest
