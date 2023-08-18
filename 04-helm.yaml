@@ -1,7 +1,7 @@
 ---
 - name: Install Helm Charts
   hosts: all
-  user: ansible
+  #user: ansible
   tasks:
     - name: Add stable chart repo
       kubernetes.core.helm_repository:
