@@ -23,7 +23,7 @@
   tasks:
     - name: Update kube config
       copy:
-				src: /etc/rancher/k3s/k3s.yaml 
+        src: /etc/rancher/k3s/k3s.yaml 
         dest: ~/.kube/config
         mode: ''0600'
         owner: opc
