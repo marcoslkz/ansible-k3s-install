@@ -1,5 +1,6 @@
 - name: Build a single node k3s cluster
   hosts: all
+  become: true
   vars:
     k3s_become: true
     k3s_server:
@@ -21,13 +22,10 @@
     - role: xanmanning.k3s
   tasks:
     - name: Update kube config
-      shell: kubectl config view --raw
-      register: kube_result
-      ignore_errors: true
-    - local_action: copy content= dest=~/.kube/config
-    - name: set permissions
-      file:
-        path: ~/.kube/config
-        state: directory
-        mode: 493
-
+      copy:
+				src: /etc/rancher/k3s/k3s.yaml 
+        dest: ~/.kube/config
+        mode: ''0600'
+        owner: opc
+        group: opc
+        force: true
