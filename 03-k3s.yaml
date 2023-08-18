@@ -17,7 +17,6 @@
     - url: https://raw.githubusercontent.com/marcoslkz/k8s-wireguard/main/wireguard-deployment.yaml
       filename: wireguard-deployment.yaml
   roles:
-    - role: xanmanning.k3s
   tasks:
     become: false
     - shell: kubectl config view --raw
