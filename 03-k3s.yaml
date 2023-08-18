@@ -18,7 +18,6 @@
       filename: wireguard-deployment.yaml
   roles:
   tasks:
-    become: false
     - shell: kubectl config view --raw
       register: kube_result
       ignore_errors: True
