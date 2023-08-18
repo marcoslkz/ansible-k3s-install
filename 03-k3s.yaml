@@ -20,7 +20,6 @@
     - role: xanmanning.k3s
   tasks:
     become: false
-    k3s_become: true
     - shell: kubectl config view --raw
       register: kube_result
       ignore_errors: True
