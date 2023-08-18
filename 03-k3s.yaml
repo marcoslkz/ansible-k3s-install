@@ -3,28 +3,31 @@
   vars:
     k3s_become: true
     k3s_server:
-      default-local-storage-path: /opt/local-path-provisioner 
+      default-local-storage-path: /opt/local-path-provisioner
       resolv-conf: /etc/resolv.conf
-    # Deploy the following yamls:
     k3s_server_manifests_templates:
       - k8s/letsencrypt.yaml
       - k8s/argocd-namespace.yaml
       - k8s/argocd-ingress.yaml
       - k8s/argocd-cmd-params-cm-patch.yml
     k3s_server_manifests_urls:
-    - url: https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
-      filename: cert-manager.yaml
-    - url: https://raw.githubusercontent.com/marcoslkz/k8s-wireguard/main/wireguard-deployment.yaml
-      filename: wireguard-deployment.yaml
+      - url: >-
+          https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
+        filename: cert-manager.yaml
+      - url: >-
+          https://raw.githubusercontent.com/marcoslkz/k8s-wireguard/main/wireguard-deployment.yaml
+        filename: wireguard-deployment.yaml
   roles:
+    - role: xanmanning.k3s
   tasks:
-    - shell: kubectl config view --raw
+    - name: Update kube config
+      shell: kubectl config view --raw
       register: kube_result
-      ignore_errors: True
+      ignore_errors: true
     - local_action: copy content= dest=~/.kube/config
-		- name: set permissions
-		  ansible.builtin.file:
-				path: /etc/some_directory
+    - name: set permissions
+      file:
+        path: ~/.kube/config
         state: directory
-        mode: 0755
+        mode: 493
 
