@@ -18,6 +18,8 @@
       - url: >-
           https://raw.githubusercontent.com/marcoslkz/k8s-wireguard/main/wireguard-deployment.yaml
         filename: wireguard-deployment.yaml
+      - url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.20/releases/cnpg-1.20.2.yaml
+        filename: cloudnative-pg.yaml
   roles:
     - role: xanmanning.k3s
   tasks:
