@@ -1,6 +1,7 @@
 ---
 - name: Install Helm Charts
   hosts: all
+  become: yes
   tasks:
     - name: Add bitnami chart repo
       kubernetes.core.helm_repository:
