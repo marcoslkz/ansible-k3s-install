@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: pg-cluster
+  namespace: pg-cluster
 spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
