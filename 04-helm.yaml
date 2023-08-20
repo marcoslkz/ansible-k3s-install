@@ -14,7 +14,7 @@
     - name: Deploy helm argocd
       kubernetes.core.helm:
         name: argocd
-        chart_ref: bitnami/argocd
+        chart_ref: argocd
         namespace: argocd
         create_namespace: true
     - name: Add external-secrets chart repo
