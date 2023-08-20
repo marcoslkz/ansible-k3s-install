@@ -1,3 +1,4 @@
+
 - name: Build a single node k3s cluster
   hosts: all
   vars:
@@ -5,7 +6,7 @@
     k3s_server:
       default-local-storage-path: /opt/local-path-provisioner
       resolv-conf: /etc/resolv.conf
-      write-kubeconfig: /home/opc/.kube/config
+      write-kubeconfig-mode: '644'
     k3s_server_manifests_templates:
       - k8s/letsencrypt.yaml
       - k8s/argocd-namespace.yaml
@@ -23,3 +24,12 @@
         filename: cloudnative-pg.yaml
   roles:
     - role: xanmanning.k3s
+  tasks:
+    - name: Update kube config
+      copy:
+        src: /etc/rancher/k3s/k3s.yaml 
+        dest: /home/opc/.kube/config
+        mode: '0600'
+        owner: opc
+        group: opc
+        force: true
