@@ -3,10 +3,6 @@
   hosts: all
   become: yes
   tasks:
-    - name: Add bitnami chart repo
-      kubernetes.core.helm_repository:
-        name: bitnami
-        repo_url: https://charts.bitnami.com/bitnami
     - name: Add argocd chart repo
       kubernetes.core.helm_repository:
         name: argocd 
@@ -14,7 +10,7 @@
     - name: Deploy helm argocd
       kubernetes.core.helm:
         name: argocd
-        chart_ref: bitnami/argo-cd
+        chart_ref: argocd/argo-cd
         namespace: argocd
         create_namespace: true
     - name: Add external-secrets chart repo
