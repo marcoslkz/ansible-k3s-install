@@ -11,7 +11,7 @@
       - k8s/letsencrypt.yaml
       - k8s/argocd-namespace.yaml
       - k8s/argocd-ingress.yaml
-      - k8s/argocd-cmd-params-cm-patch.yml
+      #- k8s/argocd-cmd-params-cm-patch.yml
       - k8s/pg-cluster.yaml
     k3s_server_manifests_urls:
       - url: >-

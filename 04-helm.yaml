@@ -5,14 +5,18 @@
   tasks:
     - name: Add argocd chart repo
       kubernetes.core.helm_repository:
-        name: argocd 
+        name: argo
         repo_url: https://argoproj.github.io/argo-helm
     - name: Deploy helm argocd
       kubernetes.core.helm:
         name: argocd
-        chart_ref: argocd/argo-cd
+        chart_ref: argo/argo-cd
         release_namespace: argocd
         create_namespace: true
+        values:
+          server: 
+            extraArgs:  
+              - --insecure
     - name: Add external-secrets chart repo
       kubernetes.core.helm_repository:
         name: external-secrets
