@@ -11,7 +11,7 @@
       kubernetes.core.helm:
         name: argocd
         chart_ref: argocd/argo-cd
-        namespace: argocd
+        release_namespace: argocd
         create_namespace: true
     - name: Add external-secrets chart repo
       kubernetes.core.helm_repository:
