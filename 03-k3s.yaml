@@ -25,11 +25,11 @@
   roles:
     - role: xanmanning.k3s
   tasks:
-    - name: Update kube config
-      copy:
-        src: /etc/rancher/k3s/k3s.yaml 
-        dest: /home/opc/.kube/config
-        mode: '0600'
-        owner: opc
-        group: opc
-        force: true
+  - name: Run kubectl command
+    shell: kubectl config view --raw
+    register: kubectl_output
+    notify: Restart kubelet service
+
+  - name: Write kubectl output to file
+    copy: content="{{ kubectl_output.stdout }}" dest=/home/opc/.kube/config
+
