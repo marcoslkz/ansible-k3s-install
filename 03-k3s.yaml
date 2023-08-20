@@ -23,12 +23,3 @@
         filename: cloudnative-pg.yaml
   roles:
     - role: xanmanning.k3s
-  tasks:
-    - name: Update kube config
-      copy:
-        src: /etc/rancher/k3s/k3s.yaml 
-        
-        mode: '0600'
-        owner: opc
-        group: opc
-        force: true
