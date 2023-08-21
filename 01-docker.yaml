@@ -2,6 +2,7 @@
   become: yes
   roles:
     - geerlingguy.docker
+  tasks:
   - name: install pre-requisites
     pip:
       name:
