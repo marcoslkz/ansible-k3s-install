@@ -2,3 +2,10 @@
   become: yes
   roles:
     - geerlingguy.docker
+  - name: install pre-requisites
+    pip:
+      name:
+        - openshift
+        - pyyaml
+        - kubernetes 
+        - python-setuptools
