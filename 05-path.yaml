@@ -8,6 +8,7 @@
         - openshift
         - pyyaml
         - kubernetes 
+        - python-setuptools
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
