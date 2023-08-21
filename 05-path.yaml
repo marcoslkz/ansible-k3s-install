@@ -2,6 +2,12 @@
 - name: Install Helm Charts
   hosts: all
   tasks:
+  - name: install pre-requisites
+    pip:
+      name:
+        - openshift
+        - pyyaml
+        - kubernetes 
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
