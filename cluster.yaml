@@ -1,7 +1,14 @@
 ---
 - hosts: all
   become: true
+  gather_facts: yes
   tasks:
+  - name: Distribution
+    ansible.builtin.debug: msg="{{ ansible_distribution }}"
+  - name: Distribution version
+    ansible.builtin.debug: msg="{{ ansible_distribution_version}}"
+  - name: Distribution major version
+    ansible.builtin.debug: msg="{{ ansible_distribution_major_version }}"
   - name: Print the package facts
     ansible.builtin.debug:
       var: ansible_facts.packages
