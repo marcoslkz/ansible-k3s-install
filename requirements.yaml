@@ -1,7 +1,6 @@
 ---
 collections:
   - name: kubernetes.core
-    version: > 12.0.0
 roles:
   # Install a collection from Ansible Galaxy.
   - name: xanmanning.k3s
