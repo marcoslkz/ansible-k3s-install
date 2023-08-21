@@ -1,16 +1,17 @@
 ---
 - hosts: all
-  become: true
   gather_facts: yes
   tasks:
   - name: Upgrade all packages
     ansible.builtin.dnf:
       name: "*"
       state: latest
+    become: true
   - name: Install dependencies
     ansible.builtin.dnf:
       name: 
         - python3-setuptools
+    become: true
   - name: install the package, force upgrade
     pip:
       name: pip
