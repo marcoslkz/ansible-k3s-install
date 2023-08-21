@@ -1,4 +1,22 @@
 ---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install dependencies
+    package:
+      name: 
+        - python3-pkg-resources 
+        - python3-setuptools
+    become: true
+    ignore_errors: true
+  - name: install pip pre-requisites
+    pip:
+      state: latest
+      name:
+        - python-setuptools
+        - openshift
+        - pyyaml
+        - kubernetes 
 - import_playbook: 01-docker.yaml
 - import_playbook: 02-actions.yaml
 - import_playbook: 03-k3s.yaml

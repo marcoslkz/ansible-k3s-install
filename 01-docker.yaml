@@ -1,19 +1,4 @@
 - hosts: all
+  become: true
   roles:
     - geerlingguy.docker
-  tasks:
-  - name: Install dependencies
-    package:
-      name: 
-        - python3-pkg-resources 
-        - python3-setuptools
-    become: true
-    ignore_errors: true
-  - name: install pip pre-requisites
-    pip:
-      state: latest
-      name:
-        - python-setuptools
-        - openshift
-        - pyyaml
-        - kubernetes 
