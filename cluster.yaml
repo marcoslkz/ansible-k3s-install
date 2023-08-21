@@ -3,22 +3,19 @@
   become: true
   gather_facts: yes
   tasks:
-  - name: Distribution
-    ansible.builtin.debug: msg="{{ ansible_distribution }}"
-  - name: Distribution version
-    ansible.builtin.debug: msg="{{ ansible_distribution_version}}"
-  - name: Distribution major version
-    ansible.builtin.debug: msg="{{ ansible_distribution_major_version }}"
-  - name: Print the package facts
-    ansible.builtin.debug:
-      var: ansible_facts.packages
+  - name: Upgrade all packages
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
   - name: Install dependencies
-    package:
+    ansible.builtin.dnf:
       name: 
-        - python3-pkg-resources 
         - python3-setuptools
-    become: true
-    ignore_errors: true
+  - name: install the package, force upgrade
+    pip:
+      name: pip
+      executable: pip3
+      state: latest
   - name: install pip pre-requisites
     pip:
       state: latest
