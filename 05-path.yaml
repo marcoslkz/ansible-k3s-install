@@ -5,7 +5,7 @@
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
-      src: ./k8s/letsencrypt.yaml
+      src: k8s/letsencrypt.yaml
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
