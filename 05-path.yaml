@@ -6,12 +6,10 @@
     kubernetes.core.k8s:
       state: present
       src: ./k8s/letsencrypt.yaml
-      apply: true
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
       src: ./k8s/argocd-ingress.yaml
-      apply: true
   - name: kubectl pg cluster
     kubernetes.core.k8s:
       state: present
