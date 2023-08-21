@@ -3,17 +3,17 @@
   hosts: all
   tasks:
   - name: kubectl tls letsencrypt
-    k8s:
+    kubernetes.core.k8s:
       state: present
       src: k8s/letsencrypt.yaml
       apply: true
   - name: kubectl argo ingress
-    k8s:
+    kubernetes.core.k8s:
       state: present
       src: k8s/argocd-ingress.yaml
       apply: true
   - name: kubectl pg cluster
-    k8s:
+    kubernetes.core.k8s:
       state: present
       src: k8s/pg-cluster.yaml
       apply: true
