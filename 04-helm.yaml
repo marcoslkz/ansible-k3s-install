@@ -7,16 +7,6 @@
       kubernetes.core.helm_repository:
         name: argo
         repo_url: https://argoproj.github.io/argo-helm
-    - name: Deploy helm argocd
-      kubernetes.core.helm:
-        name: argocd
-        chart_ref: argo/argo-cd
-        release_namespace: argocd
-        create_namespace: true
-        values:
-          server: 
-            extraArgs:  
-              - --insecure
     - name: Add external-secrets chart repo
       kubernetes.core.helm_repository:
         name: external-secrets
@@ -27,3 +17,13 @@
         chart_ref: external-secrets/external-secrets
         release_namespace: external-secrets
         create_namespace: true
+    - name: Deploy helm argocd
+      kubernetes.core.helm:
+        name: argocd
+        chart_ref: argo/argo-cd
+        release_namespace: argocd
+        create_namespace: true
+        values:
+          server: 
+            extraArgs:  
+              - --insecure
