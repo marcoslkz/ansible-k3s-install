@@ -1,0 +1,16 @@
+---
+- name: Install Helm Charts
+  hosts: all
+  tasks:
+	- name: kubectl tls letsencrypt
+	kubernetes.core.k8s:
+		state: present
+    src: k8s/letsencrypt.yaml
+	- name: kubectl argo ingress
+	kubernetes.core.k8s:
+		state: present
+    src: k8s/argocd-ingress.yaml
+	- name: kubectl pg cluster
+	kubernetes.core.k8s:
+		state: present
+    src: k8s/pg-cluster.yaml
