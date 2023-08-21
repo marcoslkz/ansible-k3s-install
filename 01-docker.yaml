@@ -3,10 +3,16 @@
   roles:
     - geerlingguy.docker
   tasks:
-  - name: install pre-requisites
+  - name: Install dependencies
+    package:
+      name: python-setuptools
+      state: latest
+    become: true
+    ignore_errors: true
+  - name: install pip pre-requisites
     pip:
       name:
+        - python-setuptools
         - openshift
         - pyyaml
         - kubernetes 
-        - python-setuptools
