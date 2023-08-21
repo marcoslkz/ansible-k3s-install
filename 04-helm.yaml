@@ -11,11 +11,11 @@
         name: external-secrets
         chart_ref: external-secrets/external-secrets
         release_namespace: external-secrets
+        create_namespace: true
     - name: Add argocd chart repo
       kubernetes.core.helm_repository:
         name: argo
         repo_url: https://argoproj.github.io/argo-helm
-        create_namespace: true
     - name: Deploy helm argocd
       kubernetes.core.helm:
         name: argocd
