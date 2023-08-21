@@ -12,19 +12,6 @@
       name: 
         - python3-setuptools
     become: true
-  - name: install the package, force upgrade
-    pip:
-      name: pip
-      executable: pip3
-      state: latest
-  - name: install pip pre-requisites
-    pip:
-      state: latest
-      name:
-        - python-setuptools
-        - openshift
-        - pyyaml
-        - kubernetes 
 - import_playbook: 01-docker.yaml
 - import_playbook: 02-actions.yaml
 - import_playbook: 03-k3s.yaml
