@@ -2,16 +2,18 @@
 - name: Install Helm Charts
   hosts: all
   tasks:
+    – name: Copy script collect_audit.sh
+      ansible.builtin.copy: src=k8s dest=~/k8s mode=0700
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
-      definition: "{{ lookup('file', 'k8s/letsencrypt.yaml') | from_yaml  }}"
+      definition: ~/k8s/letsencrypt.yaml
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
-      src: ./k8s/argocd-ingress.yaml
+      src: ~/k8s/argocd-ingress.yaml
   - name: kubectl pg cluster
     kubernetes.core.k8s:
       state: present
-      src: ./k8s/pg-cluster.yaml
+      src: ~/k8s/pg-cluster.yaml
       apply: true
