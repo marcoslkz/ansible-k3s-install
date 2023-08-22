@@ -5,11 +5,12 @@
   - name: Copy script collect_audit.sh
     ansible.builtin.copy: 
       src: k8s 
-      dest: ~/ 
+      dest: ~/k8s 
+      mode: '0700'
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
-      definition: ~/k8s/letsencrypt.yaml
+      src: ~/k8s/letsencrypt.yaml
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
