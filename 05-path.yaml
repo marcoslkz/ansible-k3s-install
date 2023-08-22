@@ -5,7 +5,7 @@
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
-      definition: "{{ lookup('file', './k8s/letsencrypt.yaml') | from_yaml  }}"
+      definition: "{{ lookup('file', 'k8s/letsencrypt.yaml') | from_yaml  }}"
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
