@@ -6,15 +6,16 @@
     ansible.builtin.copy: 
       src: k8s 
       dest: ~/k8s 
-      mode: '0700'
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
       src: ~/k8s/letsencrypt.yaml
+      apply: true
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
       src: ~/k8s/argocd-ingress.yaml
+      apply: true
   - name: kubectl pg cluster
     kubernetes.core.k8s:
       state: present
