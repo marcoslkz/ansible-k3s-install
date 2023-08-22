@@ -5,8 +5,7 @@
   - name: Copy script collect_audit.sh
     ansible.builtin.copy: 
       src: k8s 
-      dest: ~/k8s 
-      mode: '0700'
+      dest: ~/ 
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
