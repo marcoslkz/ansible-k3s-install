@@ -3,7 +3,10 @@
   hosts: all
   tasks:
   - name: Copy script collect_audit.sh
-    ansible.builtin.copy: src=k8s dest=~/k8s mode=0700
+    ansible.builtin.copy: 
+      src: k8s 
+      dest: ~/k8s 
+      mode: 0700
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
