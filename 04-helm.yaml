@@ -26,3 +26,8 @@
           server: 
             extraArgs:  
               - --insecure
+    - name: Deploy Grafana chart from local path
+      kubernetes.core.helm:
+        name: root
+        chart_ref: ~/apps 
+        release_namespace: default

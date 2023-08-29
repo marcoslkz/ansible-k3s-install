@@ -14,10 +14,5 @@
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
-      src: ~/k8s/argocd-ingress.yaml
-      apply: true
-  - name: kubectl pg cluster
-    kubernetes.core.k8s:
-      state: present
-      src: ~/k8s/pg-cluster.yaml
+      src: ~/k8s/argocd-ingressroute.yaml
       apply: true
