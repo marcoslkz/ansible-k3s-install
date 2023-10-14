@@ -2,16 +2,6 @@
 - name: Install Helm Charts
   hosts: all
   tasks:
-    - name: Add external-secrets chart repo
-      kubernetes.core.helm_repository:
-        name: external-secrets
-        repo_url: https://charts.external-secrets.io
-    - name: Deploy helm external-secrets
-      kubernetes.core.helm:
-        name: external-secrets
-        chart_ref: external-secrets/external-secrets
-        release_namespace: external-secrets
-        create_namespace: true
     - name: Add argocd chart repo
       kubernetes.core.helm_repository:
         name: argo
