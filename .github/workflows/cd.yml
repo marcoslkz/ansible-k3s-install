@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: AutoModality/action-clean@v1
   
-  release:
+  deploy:
     needs: clean
     environment: production
     #runs-on: ubuntu-latest
