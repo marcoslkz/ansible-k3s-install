@@ -24,6 +24,9 @@ jobs:
       - uses: AutoModality/action-clean@v1
   
   checkout: 
+    environment: production
+    runs-on: self-hosted
+    steps:
     - uses: actions/checkout@v4
       with:
         sparse-checkout: .
