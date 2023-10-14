@@ -10,12 +10,13 @@ on:
 
 jobs:
   lint:
-    name: Ansible Lint
+    name: Ansible Lint 
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Run ansible-lint
         uses: ansible/ansible-lint@main
-
+        
   clean:
     if: ${{ false }}
     environment: production
@@ -23,7 +24,8 @@ jobs:
     steps:
       - uses: AutoModality/action-clean@v1
   
-  checkout: 
+  checkout:
+    needs: lint
     environment: production
     runs-on: self-hosted
     steps:
