@@ -1,7 +1,5 @@
 exclude_paths:
-  - ./my/excluded/directory/
-  - ./my/other/excluded/directory/
-  - ./last/excluded/directory/
+  - ./.github/
 parseable: true
 quiet: true
 rulesdir:
@@ -15,4 +13,3 @@ tags:
   - run_this_tag
 use_default_rules: true
 verbosity: 1
-offline: true
