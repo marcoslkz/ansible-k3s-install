@@ -1,17 +1,19 @@
 - name: Install Helm Charts
   hosts: all
   tasks:
-  - name: Copy scripts
-    ansible.builtin.copy: 
-      src: k8s 
-      dest: /tmp/k8s 
+  - name: Clone the GitHub repository marcoslkz/ansible-k3s-install
+    ansible.builtin.git:
+     repo: https://github.com/marcoslkz/ansible-k3s-install.git
+      dest: /tmp/k3s
+      clone: yes
+      update: yes
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
-      src: /tmp/k8s/letsencrypt.yaml
+      src: /tmp/k3s/k8s/letsencrypt.yaml
       apply: true
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
-      src: /tmp/k8s/argocd-ingressroute.yaml
+      src: /tmp/k3s/k8s/argocd-ingressroute.yaml
       apply: true
