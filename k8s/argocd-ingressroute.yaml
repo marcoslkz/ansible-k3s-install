@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`cloudomega.sytes.net`) && Path(`/mng`)
+      match: Host(`cloudomega.sytes.net`) && Path(`mng`)
       priority: 10
       services:
         - name: argocd-server
