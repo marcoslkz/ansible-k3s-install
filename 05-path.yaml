@@ -3,7 +3,7 @@
   tasks:
   - name: Clone the GitHub repository marcoslkz/ansible-k3s-install
     ansible.builtin.git:
-     repo: https://github.com/marcoslkz/ansible-k3s-install.git
+      repo: https://github.com/marcoslkz/ansible-k3s-install.git
       dest: /tmp/k3s
       clone: yes
       update: yes
