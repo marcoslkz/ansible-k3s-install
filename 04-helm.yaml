@@ -16,3 +16,6 @@
           server: 
             extraArgs:  
               - --insecure
+              - --rootpath=/argocd
+              - --basehref=/argocd
+              - --disable-tls

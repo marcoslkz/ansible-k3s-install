@@ -2,14 +2,13 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: argocd-server
-  namespace: letsencrypt
   namespace: argocd
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`cloudomega.sytes.net`)
+      match: Host(`cloudomega.sytes.net`) && Path(`/mng`)
       priority: 10
       services:
         - name: argocd-server
