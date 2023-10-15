@@ -1,13 +1,17 @@
 - name: Install Helm Charts
   hosts: all
   tasks:
+  - name: Copy scripts
+    ansible.builtin.copy: 
+      src: k8s 
+      dest: /tmp/k8s 
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
-      src: ./k8s/letsencrypt.yaml
+      src: /tmp/k8s/letsencrypt.yaml
       apply: true
   - name: kubectl argo ingress
     kubernetes.core.k8s:
       state: present
-      src: ./k8s/argocd-ingressroute.yaml
+      src: /tmp/k8s/argocd-ingressroute.yaml
       apply: true
