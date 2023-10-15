@@ -6,6 +6,6 @@
   vars:
     - github_account: marcoslkz
     - github_repo: ansible-k3s-install
-    - access_token: "{{ lookup('env', 'PERSONAL_ACCESS_TOKEN')  }}"
+    - access_token: "{{ lookup('env', 'ORA_ACCESS_TOKEN')  }}"
   roles:
     - role: monolithprojects.github_actions_runner
