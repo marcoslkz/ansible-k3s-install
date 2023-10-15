@@ -1,7 +1,6 @@
 ---
 collections:
-  - name: kubernetes.core.helm_repository
-  - name: kubernetes.core.k8s
+  - name: kubernetes.core
 roles:
   # Install a collection from Ansible Galaxy.
   - name: xanmanning.k3s

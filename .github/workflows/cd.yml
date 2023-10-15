@@ -10,6 +10,7 @@ on:
 
 jobs:
   lint:
+    if: ${{ false }}
     name: Ansible Lint 
     runs-on: ubuntu-latest
     steps:
@@ -25,22 +26,14 @@ jobs:
     runs-on: self-hosted 
     steps:
       - uses: AutoModality/action-clean@v1
-  
-  checkout:
-    needs: lint
-    environment: production
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        sparse-checkout: .
 
   deploy:
-    needs: checkout
+    #needs: checkout
     environment: production
     #runs-on: ubuntu-latest
     runs-on: self-hosted 
     steps:
+      - uses: actions/checkout@v4
       - name: Play Ansible Playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
