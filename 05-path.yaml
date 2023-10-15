@@ -3,7 +3,7 @@
   tasks:
   - name: Clone the GitHub repository marcoslkz/ansible-k3s-install
     ansible.builtin.git:
-    repo: https://github.com/marcoslkz/ansible-k3s-install.git
+      repo: https://github.com/marcoslkz/ansible-k3s-install.git
       dest: /tmp/k3s
       clone: yes
       update: yes
@@ -17,9 +17,8 @@
       state: present
       src: /tmp/k3s/k8s/argocd-ingressroute.yaml
       apply: true
-      
-        - name: kubectl argo config
-          kubernetes.core.k8s:
-            state: present
-            src: /tmp/k3s/k8s/argocd-cmd-params-cm-patch.yml
-            apply: true
+  - name: kubectl argo config
+    kubernetes.core.k8s:
+      state: present
+      src: /tmp/k3s/k8s/argocd-cmd-params-cm-patch.yml
+      apply: true
