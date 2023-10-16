@@ -14,7 +14,7 @@ spec:
         - name: argocd-server
           port: 80
     - kind: Rule
-      match: Host(` {{ARGO_DOMAIN_NAME}} `) && Headers(`Content-Type`, `application/grpc`)
+      match: Host(` {{DOMAIN_NAME}} `) && Headers(`Content-Type`, `application/grpc`)
       priority: 11
       services:
         - name: argocd-server
