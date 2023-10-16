@@ -12,7 +12,7 @@
      
   - name: List files
     ansible.builtin.command: ls .
-      register: output
+    register: output
     
   - name: Show output 
     debug:
