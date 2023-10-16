@@ -9,6 +9,15 @@
       dest: /tmp/k3s
       clone: yes
       update: yes
+     
+  - name: List files
+    ansible.builtin.command: ls .
+      register: output
+    
+  - name: Show output 
+    debug:
+      var: output.stdout_lines
+      
   - name: Copy the YAML file
     template:
       src: k8s/argocd-ingressroute.yaml
