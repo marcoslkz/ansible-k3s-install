@@ -11,7 +11,7 @@
       update: yes
      
   - name: List files
-    ansible.builtin.command: ls .
+    ansible.builtin.command: ls -l k8s
     register: output
     
   - name: Show output 
