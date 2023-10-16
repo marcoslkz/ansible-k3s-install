@@ -3,29 +3,18 @@
   vars:
     - ARGO_DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
   tasks:
-  - name: Clone the GitHub repository marcoslkz/ansible-k3s-install
-    ansible.builtin.git:
-      repo: https://github.com/marcoslkz/ansible-k3s-install.git
-      dest: /tmp/k3s
-      clone: yes
-      update: yes
-     
-  - name: List files
-    ansible.builtin.command: ls -l k8s
-    register: output
-    
-  - name: Show output 
-    debug:
-      var: output.stdout_lines
-      
-  - name: Copy the YAML file
+  - name: Copy the letsencrypt YAML file
+    template:
+      src: k8s/letsencrypt.yaml
+      dest: /tmp/letsencrypt.yaml
+  - name: Copy the ingress YAML file
     template:
       src: k8s/argocd-ingressroute.yaml
       dest: /tmp/argocd-ingressroute.yaml
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
-      src: /tmp/k3s/k8s/letsencrypt.yaml
+      src: /tmp/letsencrypt.yaml
       apply: true
   - name: kubectl argo ingress
     kubernetes.core.k8s:
