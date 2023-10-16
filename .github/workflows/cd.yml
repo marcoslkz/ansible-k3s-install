@@ -35,9 +35,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-        sparse-checkout: |
-          .github
-          k8s
+          sparse-checkout: |
+            .github
+            k8s
       - name: Play Ansible Playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
