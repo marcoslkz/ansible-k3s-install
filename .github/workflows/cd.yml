@@ -33,7 +33,7 @@ jobs:
     #runs-on: ubuntu-latest
     runs-on: self-hosted 
     steps:
-      - name: Checkout
+      - name: Checkout git
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
