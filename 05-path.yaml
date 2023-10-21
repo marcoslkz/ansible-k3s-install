@@ -1,8 +1,21 @@
-- name: Install Helm Charts
+- name: Install ingressroute
   hosts: all
   vars:
-    - ARGO_DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
+    #DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
+    DOMAIN_NAME: grammaton.ddns.net
   tasks:
+<<<<<<< HEAD
+=======
+  - name: Check if DOMAIN_NAME is not empty
+    fail:
+      msg: "DOMAIN_NAME is empty"
+    when: DOMAIN_NAME == ""
+
+  - name: Copy the letsencrypt YAML file
+    template:
+      src: k8s/letsencrypt.yaml
+      dest: /tmp/letsencrypt.yaml
+>>>>>>> 862d08399279ffab2e01ca6a160d16b13bd910f1
   - name: Copy the ingress YAML file
     template:
       src: k8s/argocd-ingressroute.yaml
