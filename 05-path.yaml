@@ -1,22 +1,21 @@
 - name: Install ingressroute
   hosts: all
   vars:
-    #DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
-    DOMAIN_NAME: grammaton.ddns.net
+    DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
+    #DOMAIN_NAME: grammaton.ddns.net
   tasks:
-  - name: Check if DOMAIN_NAME is not empty
-    fail:
-      msg: "DOMAIN_NAME is empty"
-    when: DOMAIN_NAME == ""
-
-  - name: Copy the letsencrypt YAML file
-    template:
-      src: k8s/letsencrypt.yaml
-      dest: /tmp/letsencrypt.yaml
   - name: Copy the ingress YAML file
     template:
       src: k8s/argocd-ingressroute.yaml
       dest: /tmp/argocd-ingressroute.yaml
+  - name: Copy the letsencrypt YAML file
+    template:
+      src: k8s/letsencrypt.yaml
+      dest: /tmp/letsencrypt.yaml
+  - name: Copy the root app YAML file
+    template:
+      src: apps/templates/root.yaml
+      dest: /tmp/root.yaml
   - name: kubectl tls letsencrypt
     kubernetes.core.k8s:
       state: present
@@ -26,4 +25,9 @@
     kubernetes.core.k8s:
       state: present
       src: /tmp/argocd-ingressroute.yaml
+      apply: true
+  - name: kubectl root app
+    kubernetes.core.k8s:
+      state: present
+      src: /tmp/root.yaml
       apply: true
