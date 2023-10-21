@@ -33,10 +33,12 @@ jobs:
     #runs-on: ubuntu-latest
     runs-on: self-hosted 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           sparse-checkout: |
             .github
+            apps
             k8s
       - name: Play Ansible Playbook
         uses: dawidd6/action-ansible-playbook@v2
