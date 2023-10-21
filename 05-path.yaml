@@ -1,8 +1,8 @@
 - name: Install ingressroute
   hosts: all
   vars:
-    DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
-    #DOMAIN_NAME: grammaton.ddns.net
+    #DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
+    DOMAIN_NAME: grammaton.ddns.net
   tasks:
   - name: Copy the ingress YAML file
     template:
