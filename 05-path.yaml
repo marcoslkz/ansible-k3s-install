@@ -47,8 +47,8 @@
           name: oracle-secret
           namespace: argocd    
         stringData:
-          privateKey: {{ ORA_PRIVKEY }}
-          fingerprint: {{ ORA_FINGERPRINT }}
+          privateKey: "{{ ORA_PRIVKEY }}"
+          fingerprint: *{{ ORA_FINGERPRINT }}"
     register: config_secret
   - name: Copy the external Secrets YAML file
     template:
