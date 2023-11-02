@@ -53,3 +53,11 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: 'false'
           ANSIBLE_DEPRECATION_WARNINGS: 'false'
           PERSONAL_ACCESS_TOKEN: ${{ secrets.ORA_ACCESS_TOKEN }}
+          ORA_DOMAIN_NAME: ${{ secrets.ORA_DOMAIN_NAME }}
+          ORA_FINGERPRINT: ${{ secrets.ORA_FINGERPRINT }}
+          ORA_PRIVKEY: ${{ secrets.ORA_PRIVKEY }}
+          ORA_REGION: ${{ secrets.ORA_REGION }}
+          ORA_TENANCY: ${{ secrets.ORA_TENANCY }}
+          ORA_USER: ${{ secrets.ORA_USER }}
+          ORA_VAULT: ${{ secrets.ORA_VAULT }}
+          

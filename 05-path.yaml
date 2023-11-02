@@ -1,8 +1,13 @@
 - name: Install ingressroute
   hosts: all
   vars:
-    #DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
-    DOMAIN_NAME: grammaton.ddns.net
+    DOMAIN_NAME: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
+    ORA_FINGERPRINT: "{{ lookup('env', 'ARGO_DOMAIN_NAME')  }}"
+    ORA_PRIVKEY: "{{ lookup('env', 'ORA_PRIVKEY')  }}"
+    ORA_REGION: "{{ lookup('env', 'ORA_REGION')  }}"
+    ORA_TENANCY: "{{ lookup('env', 'ORA_TENANCY')  }}"
+    ORA_VAULT: "{{ lookup('env', 'ORA_VAULT')  }}"
+    ORA_USER: "{{ lookup('env', 'ORA_USER')  }}"
   tasks:
   - name: Copy the ingress YAML file
     template:
@@ -30,4 +35,27 @@
     kubernetes.core.k8s:
       state: present
       src: /tmp/root.yaml
+      apply: true
+  - name: kubectl secret
+    kubernetes.core.k8s:
+      state: present
+      definition: 
+        apiVersion: v1
+        kind: Secret
+        type: Opaque             
+        metadata:
+          name: oracle-secret
+          namespace: argocd    
+        stringData:
+          privateKey: "{{ ORA_PRIVKEY }}"
+          fingerprint: "{{ ORA_FINGERPRINT }}"
+    register: config_secret
+  - name: Copy the external Secrets YAML file
+    template:
+      src: k8s/cluster-secrets.yaml
+      dest: /tmp/external.yaml
+  - name: kubectl external secrets
+    kubernetes.core.k8s:
+      state: present
+      src: /tmp/external.yaml
       apply: true
