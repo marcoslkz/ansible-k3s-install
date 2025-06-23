@@ -20,6 +20,8 @@ jobs:
       - name: Run ansible-lint
         uses: ansible/ansible-lint@main
         
+        
+        
   clean:
     #if: ${{ false }}
     environment: production
