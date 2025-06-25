@@ -12,7 +12,7 @@ jobs:
   lint:
     if: ${{ false }}
     name: Ansible Lint 
-    runs-on: ubuntu-latest
+    runs-on: uqbuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Galaxy dependencies.
@@ -25,15 +25,17 @@ jobs:
   clean:
     #if: ${{ false }}
     environment: production
-    runs-on: self-hosted 
+    runs-on: uqbuntu-latest
+
+    #runs-on: self-hosted 
     steps:
       - uses: AutoModality/action-clean@v1
 
   deploy:
     #needs: checkout
     environment: production
-    #runs-on: ubuntu-latest
-    runs-on: self-hosted 
+    runs-on: ubuntu-latest
+    #runs-on: self-hosted 
     steps:
       - name: Checkout files
         uses: actions/checkout@v4
@@ -48,7 +50,7 @@ jobs:
           playbook: cluster.yaml
           inventory: |
             [all]
-            ${{ secrets.HOST_IP }} ansible_user=opc
+            ${{ secrets.NOIP_URL1 }} ansible_user=opc
           requirements: requirements.yaml
           key: ${{ secrets.ANSIBLE_KEY  }}
         env:
