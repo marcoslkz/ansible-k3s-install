@@ -4,8 +4,8 @@
   user: ansible
   become: yes
   vars:
-    - github_account: marcoslkz
-    - github_repo: ansible-k3s-install
-    - access_token: "{{ lookup('env', 'PERSONAL_ACCESS_TOKEN')  }}"
+    github_account: marcoslkz
+    github_repo: ansible-k3s-install
+    access_token: "{{ lookup('env', 'PERSONAL_ACCESS_TOKEN')  }}"
   roles:
     - role: monolithprojects.github_actions_runner
