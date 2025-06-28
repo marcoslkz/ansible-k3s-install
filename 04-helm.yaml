@@ -16,3 +16,74 @@
           server: 
             extraArgs:  
               - --insecure
+    - name: Add traefik chart repo
+      kubernetes.core.helm_repository:
+        name: traefik
+        repo_url: https://traefik.github.io/charts
+    - name: Deploy helm traefik
+      kubernetes.core.helm:
+        name: traefik
+        chart_ref: traefik/traefik
+        release_namespace: traefik
+        create_namespace: true
+        values:
+          additionalArguments:
+            #- --api.insecure=true
+            #- --providers.kubernetescrd
+            - --entrypoints.web.address=:80
+            - --entrypoints.websecure.address=:443
+            - --serversTransport.insecureSkipVerify=true
+            - --log.level=INFO
+            
+          globalArguments:
+            - "--global.sendanonymoususage=false"
+            - "--global.checknewversion=false"
+
+          deployment:
+            enabled: true
+            replicas: 3
+            annotations: {}
+            podAnnotations: {}
+            additionalContainers: []
+            initContainers: []
+
+          ports:
+            web:
+              redirections:
+                entrypoint:
+                  to: websecure
+                  priority: 10
+            websecure:
+              http3:
+                enabled: true
+              advertisedPort: 4443
+              tls:
+                enabled: true
+                
+          ingressRoute:
+            dashboard:
+              enabled: false
+
+          providers:
+            kubernetesCRD:
+              enabled: true
+              ingressClass: traefik-external
+              allowExternalNameServices: true
+            kubernetesIngress:
+              enabled: true
+              allowExternalNameServices: true
+              publishedService:
+                enabled: false
+
+          rbac:
+            enabled: true
+
+          service:
+            enabled: true
+            type: LoadBalancer
+            annotations: {}
+            labels: {}
+            spec:
+              loadBalancerIP: 10.0.0.20 # this should be an IP in the MetalLB range
+            loadBalancerSourceRanges: []
+            externalIPs: []
