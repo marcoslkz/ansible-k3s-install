@@ -16,4 +16,4 @@
 #- import_playbook: 02-actions.yaml
 - import_playbook: 03-k3s.yaml
 - import_playbook: 04-helm.yaml
-#- import_playbook: 05-path.yaml
+- import_playbook: 05-path.yaml
