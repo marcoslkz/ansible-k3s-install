@@ -2,89 +2,107 @@
 - name: Install Helm Charts
   hosts: all
   tasks:
-    - name: Add argocd chart repo
+    - name: Add argo-cd chart repo
       kubernetes.core.helm_repository:
-        name: argo
+        name: argo-cd
         repo_url: https://argoproj.github.io/argo-helm
-    - name: Deploy helm argocd
-      kubernetes.core.helm:
-        name: argocd
-        chart_ref: argo/argo-cd
-        release_namespace: argocd
-        create_namespace: true
-        values:
-          server: 
-            extraArgs:  
-              - --insecure
-    - name: Add traefik chart repo
-      kubernetes.core.helm_repository:
-        name: traefik
-        repo_url: https://traefik.github.io/charts
-    - name: Deploy helm traefik
-      kubernetes.core.helm:
-        name: traefik
-        chart_ref: traefik/traefik
-        release_namespace: traefik
-        create_namespace: true
-        values:
-          additionalArguments:
-            #- --api.insecure=true
-            #- --providers.kubernetescrd
-            - --entrypoints.web.address=:80
-            - --entrypoints.websecure.address=:443
-            - --serversTransport.insecureSkipVerify=true
-            - --log.level=INFO
+    # - name: Deploy helm argocd
+    #   kubernetes.core.helm:
+    #     name: argo-cd
+    #     #chart_ref: argo/argo-cd
+    #     chart_ref: https://github.com/marcoslkz/argocd-apps/tree/main/charts/argo-cd
+    #     release_namespace: argocd
+    #     create_namespace: true
+    #     values:
+    #       server: 
+    #         extraArgs:  
+    #           - --insecure
+    - name: Copy the argo-cd chart
+      ansible.builtin.copy:
+        src: charts/
+        dest: /tmp/argocd
+
+    - name: Copy helm argo-cd
+      ansible.builtin.command: >
+        helm install argo-cd /tmp/argocd/argo-cd
+      ignore_errors: true
+
+    - name: Install argo-cd root application
+      ansible.builtin.shell: |
+        helm template /tmp/argocd/root-app/ | kubectl apply -f -
+      args:
+        chdir: /tmp/argocd/charts # Optional: if your chart has dependencies that need to be resolved from a specific directory
+
+
+    # - name: Add traefik chart repo
+    #   kubernetes.core.helm_repository:
+    #     name: traefik
+    #     repo_url: https://traefik.github.io/charts
+    # - name: Deploy helm traefik
+    #   kubernetes.core.helm:
+    #     name: traefik
+    #     chart_ref: traefik/traefik
+    #     release_namespace: traefik 
+    #     create_namespace: true
+    #     values:
+    #       additionalArguments:
+    #         #- --api.insecure=true
+    #         #- --providers.kubernetescrd
+    #         - --entrypoints.web.address=:80
+    #         - --entrypoints.websecure.address=:443
+    #         - --serversTransport.insecureSkipVerify=true
+    #         - --log.level=INFO
             
-          globalArguments:
-            - "--global.sendanonymoususage=false"
-            - "--global.checknewversion=false"
+    #       globalArguments:
+    #         - "--global.sendanonymoususage=false"
+    #         - "--global.checknewversion=false"
 
-          deployment:
-            enabled: true
-            replicas: 3
-            annotations: {}
-            podAnnotations: {}
-            additionalContainers: []
-            initContainers: []
+    #       deployment:
+    #         enabled: true
+    #         replicas: 3
+    #         annotations: {}
+    #         podAnnotations: {}
+    #         additionalContainers: []
+    #         initContainers: []
 
-          ports:
-            web:
-              redirections:
-                entrypoint:
-                  to: websecure
-                  priority: 10
-            websecure:
-              http3:
-                enabled: true
-              advertisedPort: 4443
-              tls:
-                enabled: true
-                certResolver: letsencrypt-prod
+    #       ports:
+    #         web:
+    #           redirections:
+    #             entrypoint:
+    #               to: websecure
+    #               priority: 10
+    #         websecure:
+    #           http3:
+    #             enabled: true
+    #             #advertisedPort: 4443
+    #           tls:
+    #             enabled: true
+    #             certResolver: letsencrypt-prod
                 
-          ingressRoute:
-            dashboard:
-              enabled: false
+    #       ingressRoute:
+    #         dashboard:
+    #           enabled: false
 
-          providers:
-            kubernetesCRD:
-              enabled: true
-              ingressClass: traefik-external
-              allowExternalNameServices: true
-            kubernetesIngress:
-              enabled: true
-              allowExternalNameServices: true
-              publishedService:
-                enabled: false
+    #       providers:
+    #         kubernetesCRD:
+    #           enabled: true
+    #           ingressClass: traefik-external
+    #           allowExternalNameServices: true
+    #         kubernetesIngress:
+    #           enabled: true
+    #           allowExternalNameServices: true
+    #           publishedService:
+    #             enabled: false
 
-          rbac:
-            enabled: true
+    #       rbac:
+    #         enabled: true
 
-          service:
-            enabled: true
-            type: LoadBalancer
-            annotations: {}
-            labels: {}
-            #spec:
-              #loadBalancerIP: 10.0.0.20 # this should be an IP in the MetalLB range
-            loadBalancerSourceRanges: []
-            externalIPs: []
+    #       service:
+    #         enabled: true
+    #         type: LoadBalancer
+    #         annotations: {}
+    #         labels: {}
+    #         #spec:
+    #           #loadBalancerIP: 10.0.0.20 # this should be an IP in the MetalLB range
+    #         loadBalancerSourceRanges: []
+    #         externalIPs: []

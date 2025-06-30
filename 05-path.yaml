@@ -19,3 +19,5 @@
       state: present
       src: /tmp/adminer.yaml
       apply: true
+      
+
