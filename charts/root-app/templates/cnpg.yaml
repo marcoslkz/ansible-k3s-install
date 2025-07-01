@@ -7,7 +7,7 @@ spec:
   project: default 
   source:
     repoURL: https://cloudnative-pg.github.io/charts
-    chart: cloudnative-pg/cloudnative-pg
+    chart: cloudnative-pg
     targetRevision: "0.24.0"
     helm:
       values: |
@@ -16,7 +16,7 @@ spec:
         instances: 3
         primaryUpdateStrategy: unsupervised
         storage:
-          size: 8Gi  
+          size: 8Gipwd  
   destination:
     server: https://kubernetes.default.svc 
     namespace: pgsql 
