@@ -16,8 +16,7 @@ spec:
         instances: 3
         primaryUpdateStrategy: unsupervised
         storage:
-          size: 8Gi
-  
+          size: 8Gi  
   destination:
     server: https://kubernetes.default.svc 
     namespace: pgsql 
