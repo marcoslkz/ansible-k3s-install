@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/marcoslkz/ansible-k3s-install.git
-    chart: charts/root-app/
+    path: charts/root-app/
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
