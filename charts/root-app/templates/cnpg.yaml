@@ -11,8 +11,8 @@ spec:
     targetRevision: "0.24.0"
     helm:
       values: |
-        controllerManager:
-           replicas: 2 # Exemplo: Aumentar o número de réplicas do operador
+        #controllerManager:
+        #   replicas: 2 # Exemplo: Aumentar o número de réplicas do operador
         instances: 3
         primaryUpdateStrategy: unsupervised
         storage:
