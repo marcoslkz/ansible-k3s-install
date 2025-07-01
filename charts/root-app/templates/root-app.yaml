@@ -2,13 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: root-app
-  namespace: default
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/marcoslkz/argocd-apps.git
+          repoURL: https://github.com:marcoslkz/ansible-k3s-install.git
     path: charts/root-app/
     targetRevision: HEAD
   destination:
