@@ -8,18 +8,16 @@ spec:
   source:
     repoURL: https://cloudnative-pg.github.io/charts
     chart: cloudnative-pg
-    targetRevision: "0.23.0"
+    targetRevision: "0.24.0"
     helm:
       values: |
-        #controllerManager:
-        #   replicas: 2 # Exemplo: Aumentar o número de réplicas do operador
         instances: 3
         primaryUpdateStrategy: unsupervised
         storage:
-          size: 8Gipwd  
+          size: 8Gi
   destination:
     server: https://kubernetes.default.svc 
-    namespace: pgsql 
+    namespace: cnpg-system
   syncPolicy:
     automated:
       prune: true 
