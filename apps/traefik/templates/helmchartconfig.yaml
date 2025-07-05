@@ -18,6 +18,7 @@ spec:
         - "--log.level=INFO"
         - "--accesslog=true"
         - "--serversTransport.insecureSkipVerify=true"
+        - "--providers.kubernetescrd.ingressclass=traefik-external"
       globalArguments:
         - "--global.sendanonymoususage=false"
         - "--global.checknewversion=false"
@@ -25,12 +26,14 @@ spec:
       ports:
         web:
           port: 80
-          expose: true
+          expose:
+            default: true
           exposedPort: 80
           protocol: TCP
         websecure:
           port: 443
-          expose: true
+          expose:
+            default: true
           exposedPort: 443
           protocol: TCP
           tls:
@@ -42,3 +45,7 @@ spec:
         accessMode: ReadWriteOnce
         size: 1Gi
         path: /data
+        
+      rbac:
+        enabled: true
+      
