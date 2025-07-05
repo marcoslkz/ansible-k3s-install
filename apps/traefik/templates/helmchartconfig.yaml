@@ -5,29 +5,6 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    logs:
-      general:
-        level: INFO
-      access:
-        enabled: true
-
-    ingressRoute:
-      dashboard:
-        enabled: true
-
-    ports:
-      web:
-        redirections:
-          entrypoint:
-            to: websecure
-            priority: 10
-      websecure:
-        http3:
-          enabled: true
-          advertisedPort: 4443
-        tls:
-          enabled: true
-      
     certResolvers:
       letsencrypt-prod:
         acme:
@@ -35,12 +12,6 @@ spec:
           storage: /data/acme.json
           httpChallenge:
             entryPoint: web
-    persistence:
-      enabled: true
-      name: data
-      accessMode: ReadWriteOnce
-      size: 1Gi
-      path: /data
 
     globalArguments:
       - "--global.sendanonymoususage=false"
