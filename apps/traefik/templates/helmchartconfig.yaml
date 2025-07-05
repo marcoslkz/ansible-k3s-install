@@ -5,22 +5,18 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    certResolvers:
-      letsencrypt-prod:
-        acme:
-          email: marcos_lk@hotmail.com
-          storage: /data/acme.json
-          httpChallenge:
-            entryPoint: web
-
-    globalArguments:
-      - "--global.sendanonymoususage=false"
-      - "--global.checknewversion=false"
-
-    additionalArguments:
-      - "--serversTransport.insecureSkipVerify=true"
-
-    rbac:
-      enabled: true
-
-  
+      additionalArguments:
+        - "--entrypoints.web.address=:80"
+        - "--entrypoints.websecure.address=:443"
+        - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+        - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+        - "--certificatesresolvers.letsencrypt-prod.acme.email=marcos_lk@hotmail.com"
+        #- "--certificatesresolvers.letsencrypt-prod.acme.storage=/data/acme.json"
+        - "--certificatesresolvers.letsencrypt-prod.acme.httpchallenge.entrypoint=web"
+        # Opcional: logging
+        - "--log.level=INFO"
+        - "--accesslog=true"
+        - "--serversTransport.insecureSkipVerify=true"
+      globalArguments:
+        - "--global.sendanonymoususage=false"
+        - "--global.checknewversion=false"
