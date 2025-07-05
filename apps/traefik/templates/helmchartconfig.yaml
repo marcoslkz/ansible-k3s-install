@@ -12,14 +12,14 @@ spec:
         - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
         - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
         - "--entrypoints.websecure.http.tls=true"
-        - "--entrypoints.websecure.http.tls.certResolver=kube-system/letsencrypt-prod"
+        - "--entrypoints.websecure.http.tls.certResolver=letsencrypt-prod"
         - "--certificatesresolvers.letsencrypt-prod.acme.email=marcos_lk@hotmail.com"
-        #- "--certificatesresolvers.letsencrypt-prod.acme.storage=/data/acme.json"
+        - "--certificatesresolvers.letsencrypt-prod.acme.storage=/data/acme.json"
         - "--certificatesresolvers.letsencrypt-prod.acme.httpchallenge.entrypoint=web"
         - "--api.dashboard=true"
         # Opcional: logging
         - "--log.level=INFO"
-        - "--accesslog=true"
+        #- "--accesslog=true"
         - "--serversTransport.insecureSkipVerify=true"
         - "--providers.kubernetescrd.ingressclass=traefik-external"
       globalArguments:
@@ -48,3 +48,19 @@ spec:
       ingressRoute:
         dashboard:
           enabled: true
+
+      persistence:
+        enabled: true
+        name: data
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        path: /data
+  
+      deployment:
+        initContainers:
+          - name: volume-permissions
+            image: busybox:1.35
+            command: ["sh", "-c", "chmod 600 /data/acme.json || true"]
+            volumeMounts:
+              - name: data
+                mountPath: /data
