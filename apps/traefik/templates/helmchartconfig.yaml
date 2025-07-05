@@ -13,6 +13,7 @@ spec:
         - "--certificatesresolvers.letsencrypt-prod.acme.email=marcos_lk@hotmail.com"
         #- "--certificatesresolvers.letsencrypt-prod.acme.storage=/data/acme.json"
         - "--certificatesresolvers.letsencrypt-prod.acme.httpchallenge.entrypoint=web"
+        - "--api.dashboard=true"
         # Opcional: logging
         - "--log.level=INFO"
         - "--accesslog=true"
@@ -20,3 +21,24 @@ spec:
       globalArguments:
         - "--global.sendanonymoususage=false"
         - "--global.checknewversion=false"
+
+      ports:
+        web:
+          port: 80
+          expose: true
+          exposedPort: 80
+          protocol: TCP
+        websecure:
+          port: 443
+          expose: true
+          exposedPort: 443
+          protocol: TCP
+          tls:
+            enabled: true
+
+      persistence:
+        enabled: true
+        name: data
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        path: /data
