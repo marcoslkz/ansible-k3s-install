@@ -1,0 +1,68 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    logs:
+      general:
+        level: INFO
+      access:
+        enabled: true
+
+    ingressRoute:
+      dashboard:
+        enabled: true
+
+    ports:
+      web:
+        redirections:
+          entrypoint:
+            to: websecure
+            priority: 10
+      websecure:
+        http3:
+          enabled: true
+          advertisedPort: 4443
+        tls:
+          enabled: true
+      
+    certResolvers:
+      letsencrypt-prod:
+        acme:
+          email: marcos_lk@hotmail.com
+          storage: /data/acme.json
+          httpChallenge:
+            entryPoint: web
+          # Para DNS challenge, descomente abaixo:
+          # dnsChallenge:
+          #   provider: cloudflare
+          #   resolvers:
+          #     - "1.1.1.1:53"
+          #   delayBeforeCheck: 0
+
+    persistence:
+      enabled: true
+      name: data
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      path: /data
+
+    # Protege o Traefik dashboard com basic auth
+    additionalArguments:
+      - "--entrypoints.websecure.auth.basic.users=admin:$$apr1$$H6uskkkW$$IgXLP6ewTrSuBkTrqE8wj/"  # senha admin:admin
+      
+    globalArguments:
+      - "--global.sendanonymoususage=false"
+      - "--global.checknewversion=false"
+
+    additionalArguments:
+      - "--serversTransport.insecureSkipVerify=true"
+
+
+
+    rbac:
+      enabled: true
+
+  
