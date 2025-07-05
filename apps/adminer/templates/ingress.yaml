@@ -23,4 +23,4 @@ spec:
   tls:
     - hosts:
         - cloudomega.sytes.net
-      secretName: adminer-tls
+      secretName: domain-tls
