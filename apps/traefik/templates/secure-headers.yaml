@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: secure-headers
+  namespace: kube-system
+spec:
+  headers:
+    stsSeconds: 63072000                  # HSTS: 2 anos
+    stsIncludeSubdomains: true
+    stsPreload: true
+    forceSTSHeader: true
+
+    contentTypeNosniff: true             # Evita sniffing de MIME
+    browserXssFilter: true               # Protege contra XSS refletido
+    referrerPolicy: "strict-origin-when-cross-origin" # Limita envio de referrer
+    frameDeny: true                      # Bloqueia <iframe>, evita clickjacking
+
+    # Content Security Policy (CSP) — moderado, adaptável
+    contentSecurityPolicy: "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'"
+
+    permissionsPolicy: >                 # Substitui Feature-Policy
+      geolocation=(), microphone=(), camera=()
+
+    customRequestHeaders:
+      X-Content-Type-Options: "nosniff"
