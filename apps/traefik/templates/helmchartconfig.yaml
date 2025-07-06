@@ -64,6 +64,7 @@ spec:
             volumeMounts:
               - name: data
                 mountPath: /data
+                
       tlsOptions:
         default:
           minVersion: VersionTLS12
