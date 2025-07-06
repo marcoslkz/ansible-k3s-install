@@ -79,3 +79,17 @@ spec:
           curvePreferences:
             - CurveP521
             - CurveP384
+
+      deployment:
+        additionalVolumes:
+          - name: dynamic-config
+            configMap:
+              name: cm-traefik-dynamic
+        additionalVolumeMounts:
+          - name: dynamic-config
+            mountPath: /etc/traefik/dynamic
+            readOnly: true
+      
+      additionalArguments:
+        - "--providers.file.directory=/etc/traefik/dynamic"
+        - "--providers.file.watch=true"

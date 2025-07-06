@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-traefik-dynamic
+  namespace: kube-system
+data:
+  secure-headers.yaml: |
+    http:
+      middlewares:
+        secure-headers:
+          headers:
+            stsSeconds: 63072000
+            stsIncludeSubdomains: true
+            stsPreload: true
+            forceSTSHeader: true
+            contentTypeNosniff: true
+            browserXssFilter: true
+            frameDeny: true
+            referrerPolicy: "strict-origin-when-cross-origin"
+            contentSecurityPolicy: "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'"
+            permissionsPolicy: >
+              geolocation=(), microphone=(), camera=()
