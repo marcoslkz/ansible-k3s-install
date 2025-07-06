@@ -6,7 +6,7 @@ metadata:
 spec:
   valuesContent: |-
       additionalArguments:
-        - "--providers.file.directory=/dynamic"
+        - "--providers.file.directory=/etc/traefik/dynamic"
         - "--providers.file.watch=true"
         - "--entrypoints.web.address=:80"
         - "--entrypoints.websecure.address=:443"
@@ -73,7 +73,16 @@ spec:
             - CurveP521
             - CurveP384
 
-      deployment:
+      deployment:         
+        additionalVolumes:
+          - name: dynamic-config
+            configMap:
+              name: cm-traefik-dynamic
+        additionalVolumeMounts:
+          - name: dynamic-config
+            mountPath: /etc/traefik/dynamic
+            readOnly: true
+      
         initContainers:
           - name: volume-permissions
             image: busybox:1.35
@@ -81,13 +90,4 @@ spec:
             volumeMounts:
               - name: data
                 mountPath: /data
-                
-        additionalVolumes:
-          - name: dynamic-config
-            configMap:
-              name: cm-traefik-dynamic
-        additionalVolumeMounts:
-          - name: dynamic-config
-            mountPath: /dynamic
-            readOnly: true
-      
+       
