@@ -6,6 +6,8 @@ metadata:
 spec:
   valuesContent: |-
       additionalArguments:
+        - "--providers.file.directory=/dynamic"
+        - "--providers.file.watch=true"
         - "--entrypoints.web.address=:80"
         - "--entrypoints.websecure.address=:443"
         - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
@@ -56,15 +58,6 @@ spec:
         size: 1Gi
         path: /data
   
-      deployment:
-        initContainers:
-          - name: volume-permissions
-            image: busybox:1.35
-            command: ["sh", "-c", "chmod 600 /data/acme.json || true"]
-            volumeMounts:
-              - name: data
-                mountPath: /data
-                
       tlsOptions:
         default:
           minVersion: VersionTLS12
@@ -81,15 +74,20 @@ spec:
             - CurveP384
 
       deployment:
+        initContainers:
+          - name: volume-permissions
+            image: busybox:1.35
+            command: ["sh", "-c", "chmod 600 /data/acme.json || true"]
+            volumeMounts:
+              - name: data
+                mountPath: /data
+                
         additionalVolumes:
           - name: dynamic-config
             configMap:
               name: cm-traefik-dynamic
         additionalVolumeMounts:
           - name: dynamic-config
-            mountPath: /etc/traefik/dynamic
+            mountPath: /dynamic
             readOnly: true
       
-      additionalArguments:
-        - "--providers.file.directory=/etc/traefik/dynamic"
-        - "--providers.file.watch=true"
