@@ -9,3 +9,5 @@
     access_token: "{{ lookup('env', 'PERSONAL_ACCESS_TOKEN')  }}"
   roles:
     - role: monolithprojects.github_actions_runner
+    - role:
+        - andrewrothstein.kubeseal

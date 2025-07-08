@@ -5,6 +5,6 @@ roles:
   # Install a collection from Ansible Galaxy.
   - name: xanmanning.k3s
   - name: geerlingguy.docker 
-  - name: monolithprojects.github_actions_runner
+  - name: andrewrothstein.kubeseal
   
 
