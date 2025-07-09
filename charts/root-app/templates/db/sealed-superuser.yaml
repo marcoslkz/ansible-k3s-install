@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: dbsuper
+  namespace: cnpg-system
+spec:
+  encryptedData:
+    password: AgCf2StPkLG6IG6VX6Ch0E/S1142k3tHIiwVDIukcxBo2qite2/c9grg7drigWp2WB9HKmzhguFexkDTDhZva55IavKeb9Ltr2IO7zOY5FUGufdVPMlNwFSILinE0shb2tSI2CLPhCuTzvJqUEHxMm46ap6idjsxu3hCCJwkKRVBnMis55asCCXYI4XQwbU5NxrpqBjrduZlsSacA8/VRFqNfH7BtP90l9sx52WBC29w2ZOr4d2JQomqRgaE0qKwxAgiOjqZofW/+zicU9E4m9zlz94yUEoWIEHyPBUR3clf/CfsAW/43UwcGxFB0eN6XJ82hDw71O9+rNgcif5xsyIylmNg+YR0Ro31Um8fjjeiZ9igB3WWyjuy/5gasQKTyORPKSZD0gKhY3HfOfVOIylL+Unya+DkuwL9uoh0T1A0rxMRPKr231uzmo8Uo5N5gcWplGb7e+BxglKNzt9w6mgDj0X72mg1LycTJQsWflcIqckLgd3wgbi/Tl4hej0qUeUu5YgT5KgmrkEhLoYmSJfxz+KCdt0qFQDUYg/y9zyNGkkMsVFC/AR24Xp+hsKpKbJYqIvrOFtuOg6ViAk4kMYRGzSbRLrELOUVGrvw2uy2ZfI4t7D4efANUwJnpp6Ui4glcTunjfkkJgrgplqvvYvNvy7fZwSECYyvGuqRGJzZGlCIpb/L+D0HkITUuE3GeOcBPKs/MDX3rapUCeUPvQf3
+  template:
+    metadata:
+      creationTimestamp: null
+      name: dbsuper
+      namespace: cnpg-system
