@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: BackupSchedule
+metadata:
+  name: db-backup-daily
+  namespace: cnpg-system
+spec:
+  schedule: "0 2 * * *"  # 02:00 UTC
+  backupOwnerReference: self
+  cluster:
+    name: db
+  retentionPolicy:
+    retain: 7
+    type: count

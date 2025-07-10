@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: BackupSchedule
+metadata:
+  name: db-backup-monthly
+  namespace: cnpg-system
+spec:
+  schedule: "0 3 30 * *" 
+  backupOwnerReference: self
+  cluster:
+    name: db
+  retentionPolicy:
+    type: count
+    retain: 2

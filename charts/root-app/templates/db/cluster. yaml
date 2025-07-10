@@ -1,0 +1,18 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: db
+  namespace: cnpg-system
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  superuserSecret:
+    name: dbsuper
+  storage:
+    size: 8Gi
+    storageClass: standard
+  backup:
+    volume:
+      storageClass: standard
+      size: 2Gi
+    

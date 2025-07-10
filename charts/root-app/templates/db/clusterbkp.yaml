@@ -1,0 +1,8 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Backup
+metadata:
+  name: db-backup-initial
+  namespace: cnpg-system
+spec:
+  cluster:
+    name: db
