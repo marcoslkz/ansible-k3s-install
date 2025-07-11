@@ -6,6 +6,7 @@ metadata:
 spec:
   schedule: "0 2 * * *"  # 02:00 UTC
   backupOwnerReference: self
+  immediate: true
   cluster:
     name: db
   retentionPolicy:

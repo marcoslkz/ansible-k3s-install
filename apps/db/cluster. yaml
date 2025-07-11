@@ -6,13 +6,37 @@ metadata:
 spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
-  superuserSecret:
-    name: dbsuper
+
   storage:
     size: 8Gi
-    storageClass: standard
+    storageClass: standard  # ajuste se estiver usando outro SC
+
   backup:
     volume:
-      storageClass: standard
       size: 2Gi
-    
+      storageClass: standard
+
+  superuserSecret:
+    name: db-superuser  # opcional, mas recomendado para evitar warnings
+
+  postgresql:
+    parameters:
+      max_connections: "500"
+      shared_buffers: "32MB"
+      effective_cache_size: "96MB"
+      maintenance_work_mem: "8MB"
+      checkpoint_completion_target: "0.9"
+      wal_buffers: "983kB"
+      default_statistics_target: "100"
+      random_page_cost: "1.1"
+      effective_io_concurrency: "300"
+      work_mem: "81kB"
+      huge_pages: "off"
+      max_wal_size: "1GB"
+
+  bootstrap:
+    initdb:
+      database: keycloak
+      owner: keycloak
+      secret:
+        name: db-app-access

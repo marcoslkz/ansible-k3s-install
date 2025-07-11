@@ -23,3 +23,33 @@
 
 
   kubeseal --cert /opt/files/pub-cert.pem --format=yaml < /tmp/secret.yaml > sealed-superuser.yaml
+  
+  
+## new user
+  export DBUSER=xxx
+  export DBPASS='xxx'
+  
+  envsubst <<EOF | kubectl create -f - --dry-run=client -o yaml > /tmp/db-app-access.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-app-access
+  namespace: cnpg-system
+type: Opaque
+stringData:
+  username: ${DBUSER}
+  password: ${DBPASS}
+  dbname: ${DBUSER}
+  host: db-rw
+  jdbc-uri: jdbc:postgresql://db-rw:5432/${DBUSER}?password=${DBPASS}&user=${DBUSER}
+  pgpass: db-rw:5432:${DBUSER}:${DBUSER}:${DBPASS}\n
+  port: "5432"
+  uri: postgresql://${DBUSER}:${DBPASS}@db-rw:5432/${DBUSER}
+  user: ${DBUSER}
+EOF
+
+  kubeseal --cert pub-cert.pem --format=yaml <
+  
+  
+  kubeseal --cert /opt/files/pub-cert.pem --format=yaml < /tmp/db-app-access.yaml > sealed-db-app-access.yaml
+  
