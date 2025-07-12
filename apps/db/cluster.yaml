@@ -31,8 +31,6 @@ spec:
 
   bootstrap:
     initdb:
-      database: keycloak
-      owner: keycloak
       secret:
         name: db-app-access
 
