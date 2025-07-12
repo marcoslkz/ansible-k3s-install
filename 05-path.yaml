@@ -14,10 +14,10 @@
       state: present
       src: /tmp/letsencrypt.yaml
       apply: true
-  - name: kubectl adminer ingress
+  - name: kubectl install cnpg
     kubernetes.core.k8s:
       state: present
-      src: /tmp/adminer.yaml
+      src: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.26/releases/cnpg-1.26.0.yaml
       apply: true
       
 
