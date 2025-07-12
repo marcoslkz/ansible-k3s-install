@@ -11,7 +11,6 @@ spec:
     size: 8Gi
 
   backup:
-    enabled: true
     schedule: "0 0 * * *"  # Daily at midnight
     retentionPolicy: "7d"  # Keep backups for 7 days
 
@@ -38,7 +37,7 @@ spec:
   bootstrap:
     initdb:
       database: db
-      owner: XX01
+      owner: db
       secret:
         name: db-app-access
 

@@ -42,15 +42,13 @@ stringData:
   owner: ${DBUSER}
   database: ${DBUSER}
   dbname: ${DBUSER}
-  host: db-rw
-  jdbc-uri: jdbc:postgresql://db-rw:5432/${DBUSER}?password=${DBPASS}&user=${DBUSER}
+  host: db-rw.cnpg-system
+  jdbc-uri: jdbc:postgresql://db-rw.cnpg-system:5432/${DBUSER}?password=${DBPASS}&user=${DBUSER}
   pgpass: db-rw:5432:${DBUSER}:${DBUSER}:${DBPASS}\n
   port: "5432"
-  uri: postgresql://${DBUSER}:${DBPASS}@db-rw:5432/${DBUSER}
+  uri: postgresql://${DBUSER}:${DBPASS}@db-rw.cnpg-system:5432/${DBUSER}
   user: ${DBUSER}
 EOF
-
-  kubeseal --cert pub-cert.pem --format=yaml <
   
   
   kubeseal --cert /opt/files/pub-cert.pem --format=yaml < /tmp/db-app-access.yaml > sealed-db-app-access.yaml
