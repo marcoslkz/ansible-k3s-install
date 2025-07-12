@@ -7,11 +7,27 @@ spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
 
+  selector:
+    matchLabels:
+      "cnpg.io/cluster": db
+
+  monitoring:
+    enabled: true
+    serviceMonitor:
+      additionalLabels:
+        app: cnpg-system
+      interval: 120s
+      scrapeTimeout: 10s
+      selector:
+        matchLabels:
+          "cnpg.io/cluster": db
+
+
   storage:
     size: 8Gi
 
   backup:
-    retentionPolicy: "7d"  # Keep backups for 7 days
+    retentionPolicy: "7d"
 
   imageName: ghcr.io/cloudnative-pg/postgresql:17
 
