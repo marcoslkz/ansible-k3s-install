@@ -4,7 +4,7 @@ metadata:
   name: db
   namespace: cnpg-system
 spec:
-  instances: 3
+  instances: 1
   primaryUpdateStrategy: unsupervised
 
   storage:
