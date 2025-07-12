@@ -9,15 +9,10 @@ spec:
 
   storage:
     size: 8Gi
-    storageClass: standard  # ajuste se estiver usando outro SC
-
-  backup:
-    volume:
-      size: 2Gi
-      storageClass: standard
+    storageClass: standard
 
   superuserSecret:
-    name: db-superuser  # opcional, mas recomendado para evitar warnings
+    name: db-superuser
 
   postgresql:
     parameters:
@@ -40,3 +35,8 @@ spec:
       owner: keycloak
       secret:
         name: db-app-access
+
+  #backup:
+  #  volume:
+  #    size: 2Gi
+  #    storageClass: standard

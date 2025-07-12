@@ -39,6 +39,8 @@ type: Opaque
 stringData:
   username: ${DBUSER}
   password: ${DBPASS}
+  owner: ${DBUSER}
+  database: ${DBUSER}
   dbname: ${DBUSER}
   host: db-rw
   jdbc-uri: jdbc:postgresql://db-rw:5432/${DBUSER}?password=${DBPASS}&user=${DBUSER}
