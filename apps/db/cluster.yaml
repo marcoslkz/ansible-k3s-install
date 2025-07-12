@@ -10,6 +10,13 @@ spec:
   storage:
     size: 8Gi
 
+  backup:
+    enabled: true
+    schedule: "0 0 * * *"  # Daily at midnight
+    retentionPolicy: "7d"  # Keep backups for 7 days
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:17
+
   superuserSecret:
     name: db-superuser
 
@@ -30,6 +37,8 @@ spec:
 
   bootstrap:
     initdb:
+      database: db
+      owner: XX01
       secret:
         name: db-app-access
 
