@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak
+  namespace: keycloak
+data:
+  JAVA_OPTS_APPEND: '-Dkeycloak.profile.feature.docker=enabled'
+  PROXY_ADDRESS_FORWARDING: 'true'
+  KEYCLOAK_LOGLEVEL: INFO
+  ROOT_LOGLEVEL: INFO
