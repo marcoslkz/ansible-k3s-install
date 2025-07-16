@@ -15,20 +15,3 @@ spec:
   tls:
     certResolver: letsencrypt-prod
     
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: your-ingressroute-name
-  namespace: traefik
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: Host(`example.com`)
-      kind: Rule
-      services:
-        - name: your-service-name
-          port: your-service-port
-  tls:
-    secretName: your-secret-name
-...
