@@ -11,6 +11,24 @@ spec:
       kind: Rule
       services:
         - name: keycloak
-          port: 80
+          port: 8080
   tls:
     certResolver: letsencrypt-prod
+    
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: your-ingressroute-name
+  namespace: traefik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`example.com`)
+      kind: Rule
+      services:
+        - name: your-service-name
+          port: your-service-port
+  tls:
+    secretName: your-secret-name
+...
