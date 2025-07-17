@@ -71,3 +71,13 @@ spec:
           existingSecretUserKey: username
           existingSecretPasswordKey: password
 
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
