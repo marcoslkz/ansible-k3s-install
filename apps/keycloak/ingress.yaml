@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: auth-cloudomega.sytes.net
+    - host: portal-cloudomega.sytes.net
       http:
         paths:
           - path: /
@@ -23,5 +23,5 @@ spec:
                   number: 8080
   tls:
     - hosts:
-        - auth-cloudomega.sytes.net
+        - portal-cloudomega.sytes.net
       #secretName: domain-tls
