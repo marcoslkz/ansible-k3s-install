@@ -1,0 +1,36 @@
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  hostname: cloudomega.sytes.net
+  tls: true
+  selfSigned: false
+  extraHosts:
+    - name: portal-cloudomega.sytes.net
+      path: /auth
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+
+adminIngress:
+  enabled: true
+  ingressClassName: traefik
+  hostname: portal-cloudomega.sytes.net
+  tls: true
+  selfSigned: false
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+
+proxy:
+  forwardingHeaders: true
+
+postgresql:
+  enabled: false
+
+externalDatabase:
+  host: db-rw.cnpg-system.svc.cluster.local
+  user: keycloak
+  database: keycloak
+  existingSecret: db-app-access
+  existingSecretUserKey: username
+  existingSecretPasswordKey: password

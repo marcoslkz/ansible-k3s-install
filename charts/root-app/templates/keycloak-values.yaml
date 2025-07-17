@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak 
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/marcoslkz/ansible-k3s-install.git
+    path: apps/keycloak/
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+      
+      
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: registry-1.docker.io/bitnamicharts
+    chart: keycloak
+    targetRevision: "24.7.1"
+    helm:
+      releaseName: keycloak
+      valueFiles:
+        - keycloak-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
