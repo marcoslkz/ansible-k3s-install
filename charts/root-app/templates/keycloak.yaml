@@ -1,36 +1,84 @@
-ingress:
-  enabled: true
-  ingressClassName: traefik
-  hostname: cloudomega.sytes.net
-  tls: true
-  selfSigned: false
-  extraHosts:
-    - name: portal-cloudomega.sytes.net
-      path: /auth
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak 
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
-adminIngress:
-  enabled: true
-  ingressClassName: traefik
-  hostname: portal-cloudomega.sytes.net
-  tls: true
-  selfSigned: false
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/marcoslkz/ansible-k3s-install.git
+    path: apps/keycloak/
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+spec:
+  project: default
 
-proxy:
-  forwardingHeaders: true
+  source:
+    repoURL: registry-1.docker.io/bitnamicharts
+    chart: keycloak
+    targetRevision: "24.7.1"
+    helm:
+      releaseName: keycloak
+      valueFiles: []  # não usados
+      valuesObject:
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          hostname: cloudomega.sytes.net
+          tls: true
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+            traefik.ingress.kubernetes.io/router.entrypoints: websecure
+            traefik.ingress.kubernetes.io/router.middlewares: secure-headers@kubernetescrd
 
-postgresql:
-  enabled: false
+        adminIngress:
+          enabled: true
+          ingressClassName: traefik
+          hostname: portal-cloudomega.sytes.net
+          tls: true
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+            traefik.ingress.kubernetes.io/router.entrypoints: websecure
+            traefik.ingress.kubernetes.io/router.middlewares: secure‑headers@kubernetescrd
 
-externalDatabase:
-  host: db-rw.cnpg-system.svc.cluster.local
-  user: keycloak
-  database: keycloak
-  existingSecret: db-app-access
-  existingSecretUserKey: username
-  existingSecretPasswordKey: password
+        proxy:
+          forwardingHeaders: true
+
+        postgresql:
+          enabled: false
+
+        externalDatabase:
+          host: db-rw.cnpg-system.svc.cluster.local
+          user: keycloak
+          database: keycloak
+          existingSecret: db-app-access
+          existingSecretUserKey: username
+          existingSecretPasswordKey: password
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
