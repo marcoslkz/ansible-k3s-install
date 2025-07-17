@@ -28,13 +28,14 @@
 ## new user
   export DBUSER=xxx
   export DBPASS='xxx'
+  export NAMESPACE=app_namespace 
   
   envsubst <<EOF | kubectl create -f - --dry-run=client -o yaml > /tmp/db-app-access.yaml
 apiVersion: v1
 kind: Secret
 metadata:
   name: db-app-access
-  namespace: cnpg-system
+  namespace: ${NAMESPACE}
 type: Opaque
 stringData:
   username: ${DBUSER}
