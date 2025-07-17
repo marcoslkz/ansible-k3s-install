@@ -4,7 +4,6 @@ kind: SealedSecret
 metadata:
   creationTimestamp: null
   name: db-app-access
-  namespace: cnpg-system
 spec:
   encryptedData:
     database: AgAaXkJkAQWXjt+49x1KJJ6Kn6yOG7gO1STmaIxObe40tfuSn3w8MCeUhpRcRP3VMVfcklPCUbSAihV4csC+01upadMKguyZnVOsivbz1nJ+SlVO4TIty/FlJCSHxP4w6V/LuuVK8EH7iMNFbOqASdBatu/7/yiqoEN1ie77TgTmkOSpceXyUmZLKT/9A6eg5cc4i2d/VOEiuflwL9LMsdBS66Nc0RKYUQVlIVOqjN/XjtcyY+xHeC/mmTSWo0BDL1NutAOMOPrBmCOwfZEVxe9sIl8R1EBLVuXE7Iz3UQGBhGUmkJ/ofzmxixrryrifTty8pAfaXsYRd4wrGOdxcGa274m4sw2AfH0gtmqV3bDRYRzNEJacG1g1w+FFapCG8SjcAq6MJzHQtmi/k84dv+3yMKWf42MsoeeLwm1dhqcEHLWGLbKBU791XOykWTMixLdeykMJltQPx5BYLDyrekz3Y0eXRF+u9+Wsfz1RZNQ3DY3PxW6PzyYcmCtZrdkcUsGBrTvWGTaHe0jF5pYYRKvI0qoUvn0kKc9TM9J6M1BsYPI5Ms34M90VSnZVMxJmomA97w8iVDZxrwU2xNhmjsM+fJ/HzsgMJulP8K1/q/QedrezJqe+3tqi6PV71K4q+dO08T9ixvpdu7YiY5gNIOBSUcqbH8oMnGOSYbBNeJSRxjFXFmLn0yMMsIKLH0HwXp/rfg==
@@ -22,5 +21,4 @@ spec:
     metadata:
       creationTimestamp: null
       name: db-app-access
-      namespace: cnpg-system
     type: Opaque
