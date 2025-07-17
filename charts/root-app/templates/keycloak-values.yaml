@@ -29,20 +29,55 @@ metadata:
   namespace: argocd
 spec:
   project: default
+
   source:
     repoURL: registry-1.docker.io/bitnamicharts
     chart: keycloak
     targetRevision: "24.7.1"
     helm:
       releaseName: keycloak
-      valueFiles:
-        - keycloak-values.yaml
+      valueFiles: []  # não usados
+      valuesObject:
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          hostname: cloudomega.sytes.net
+          tls: true
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+            traefik.ingress.kubernetes.io/router.entrypoints: websecure
+            traefik.ingress.kubernetes.io/router.middlewares: secure-headers@kubernetescrd
+
+        adminIngress:
+          enabled: true
+          ingressClassName: traefik
+          hostname: portal-cloudomega.sytes.net
+          tls: true
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+            traefik.ingress.kubernetes.io/router.entrypoints: websecure
+
+        proxy:
+          forwardingHeaders: true
+
+        postgresql:
+          enabled: false
+
+        externalDatabase:
+          host: db-rw.cnpg-system.svc.cluster.local
+          user: keycloak
+          database: keycloak
+          existingSecret: db-app-access
+          existingSecretUserKey: username
+          existingSecretPasswordKey: password
+
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
+
   syncPolicy:
     automated:
-      selfHeal: true
       prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
