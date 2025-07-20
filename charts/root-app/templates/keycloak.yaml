@@ -67,7 +67,11 @@ spec:
           existingSecretHostKey: host
           existingSecretUserKey: username
           existingSecretPasswordKey: password
-
+          
+        proxy:
+          enabled: true
+          addressForwarding: true
+          forwardingHeaders: true
 
   destination:
     server: https://kubernetes.default.svc
