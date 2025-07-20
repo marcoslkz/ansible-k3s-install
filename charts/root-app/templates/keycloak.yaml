@@ -62,10 +62,9 @@ spec:
           enabled: false
     
         externalDatabase:
-          host: db-rw.cnpg-system.svc.cluster.local
-          user: keycloak
-          database: keycloak
           existingSecret: db-app-access
+          existingSecretDatabaseKey: database
+          existingSecretHostKey: host
           existingSecretUserKey: username
           existingSecretPasswordKey: password
 
