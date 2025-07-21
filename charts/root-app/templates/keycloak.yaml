@@ -69,9 +69,10 @@ spec:
           existingSecretPasswordKey: password
           
           proxy:
-            enabled: true
             addressForwarding: true
             forwardingHeaders: true
+            enabled: true
+
 
   destination:
     server: https://kubernetes.default.svc
