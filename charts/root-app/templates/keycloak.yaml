@@ -69,7 +69,7 @@ spec:
           existingSecretPasswordKey: password
           
         proxy: edge
-        proxyHeaders: true
+        proxyHeaders: xforwarded
 
 
   destination:
