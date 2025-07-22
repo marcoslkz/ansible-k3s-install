@@ -17,11 +17,11 @@
 ## new user
   export USERPASS='xxx'
   export SECRETNAME='xxx'
-
+  export NAMESPACE=app_namespace 
 
   kubectl create secret generic ${SECRETNAME} \
   --from-literal=password='${USERPASS}' \
-  --namespace=cnpg-system \
+  --namespace=${NAMESPACE} \
   --dry-run=client -o yaml > /tmp/secret.yaml
 
 
