@@ -57,6 +57,11 @@ spec:
         ingressProxy:
           # Define que o chart adaptera URLs e cabeçalhos via Traefik
           enable: true
+          
+        auth:
+          adminUser: keycloak
+          existingSecret: keycloak-admin-pass
+          existingSecretPasswordKey: admin-password
     
         postgresql:
           enabled: false

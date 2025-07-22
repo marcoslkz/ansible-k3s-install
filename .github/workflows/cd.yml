@@ -2,9 +2,9 @@ name: cd
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "prod" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "prod" ]
 
   workflow_dispatch:
 
