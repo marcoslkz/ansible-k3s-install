@@ -13,19 +13,20 @@
 ### sealed secrets 
 
   kubectl get secret sealed-secrets-keyXXXX   -n kube-system   -o jsonpath="{.data['tls\.crt']}" | base64 -d > /opt/files/pub-cert.pem
+  
+## new user
+  export USERPASS='xxx'
 
   kubectl create secret generic dbsuper \
-  --from-literal=password='SenhaUltraSegura123' \
+  --from-literal=password='${USERPASS}' \
   --namespace=cnpg-system \
   --dry-run=client -o yaml > /tmp/secret.yaml
-  
-  
 
 
   kubeseal --cert /opt/files/pub-cert.pem --format=yaml < /tmp/secret.yaml > sealed-superuser.yaml
   
   
-## new user
+## new dbuser
   export DBUSER=xxx
   export DBPASS='xxx'
   export NAMESPACE=app_namespace 
