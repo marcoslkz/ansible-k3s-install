@@ -27,6 +27,8 @@ kind: Application
 metadata:
   name: keycloak
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
 
@@ -80,9 +82,4 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
-    automated:
-      prune: true
-      selfHeal: true
+  
