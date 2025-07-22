@@ -16,8 +16,10 @@
   
 ## new user
   export USERPASS='xxx'
+  export SECRETNAME='xxx'
 
-  kubectl create secret generic dbsuper \
+
+  kubectl create secret generic ${SECRETNAME} \
   --from-literal=password='${USERPASS}' \
   --namespace=cnpg-system \
   --dry-run=client -o yaml > /tmp/secret.yaml
