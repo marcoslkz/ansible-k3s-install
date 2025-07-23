@@ -62,9 +62,10 @@ spec:
           
         auth:
           adminUser: keycloak
+          username: keycloak
           existingSecret: keycloak-admin-pass
           existingSecretPasswordKey: password
-    
+  
         postgresql:
           enabled: false
     
