@@ -61,9 +61,9 @@ spec:
           enable: true
           
         auth:
-          adminUser: keycloak
+          adminUser: super
           existingSecret: keycloak-admin-pass
-          existingSecretPasswordKey: password
+          passwordSecretKey: password
   
         postgresql:
           enabled: false
