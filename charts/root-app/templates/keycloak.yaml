@@ -61,7 +61,6 @@ spec:
           enable: true
           
         auth:
-          adminUser: super
           existingSecret: keycloak-admin-pass
           passwordSecretKey: password
   
