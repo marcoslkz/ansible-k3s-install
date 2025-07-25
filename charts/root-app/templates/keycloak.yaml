@@ -60,10 +60,6 @@ spec:
           # Define que o chart adaptera URLs e cabeçalhos via Traefik
           enable: true
           
-        auth:
-          existingSecret: keycloak-admin-pass
-          passwordSecretKey: password
-  
         postgresql:
           enabled: false
     
