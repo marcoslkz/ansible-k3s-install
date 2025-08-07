@@ -61,7 +61,6 @@ spec:
           enable: true
           
         postgresql:
-          enabled: false
     
         externalDatabase:
           existingSecret: db-app-access
