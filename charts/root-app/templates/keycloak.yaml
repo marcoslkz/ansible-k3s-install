@@ -18,17 +18,13 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-    automated:
-      prune: true
-      selfHeal: true
+      
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: keycloak
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
 
@@ -59,8 +55,9 @@ spec:
         ingressProxy:
           # Define que o chart adaptera URLs e cabeçalhos via Traefik
           enable: true
-          
+    
         postgresql:
+          enabled: false
     
         externalDatabase:
           existingSecret: db-app-access
@@ -76,4 +73,8 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
-  
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    
+    
