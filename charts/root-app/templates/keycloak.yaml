@@ -38,6 +38,7 @@ spec:
           enabled: true
           ingressClassName: traefik
           hostname: cloudomega.sytes.net
+          pathType: Prefix
           tls: true
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -56,6 +57,22 @@ spec:
           # Define que o chart adaptera URLs e cabeçalhos via Traefik
           enable: true
     
+        defaultInitContainers:
+          prepareWriteDirs:
+            enabled: false
+        
+        auth:
+          adminUser: super
+          adminPassword: "change-me!!!"
+
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 2Gi
+          limits:
+            cpu: 2000m
+            memory: 4Gi
+
         postgresql:
           enabled: false
     
