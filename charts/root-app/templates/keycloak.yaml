@@ -16,6 +16,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: keycloak
   syncPolicy:
+    automated:
+      prune: true 
+      selfHeal: true 
     syncOptions:
       - CreateNamespace=true
       
@@ -25,6 +28,8 @@ kind: Application
 metadata:
   name: keycloak
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
 
@@ -77,9 +82,9 @@ spec:
           enabled: false
     
         externalDatabase:
+          database: db
+          host: db-rw.cnpg-system
           existingSecret: db-app-access
-          existingSecretDatabaseKey: database
-          existingSecretHostKey: host
           existingSecretUserKey: username
           existingSecretPasswordKey: password
           
@@ -91,6 +96,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: keycloak
   syncPolicy:
+    automated:
+      prune: true 
+      selfHeal: true 
     syncOptions:
       - CreateNamespace=true
     
