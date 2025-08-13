@@ -3,7 +3,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: keycloak
-  namespace: cnpg-system
+  namespace: keycloak
 spec:
   cluster:
     name: db
