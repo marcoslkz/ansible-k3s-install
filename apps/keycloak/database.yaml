@@ -6,6 +6,6 @@ metadata:
   namespace: keycloak
 spec:
   cluster:
-    name: db
+    name: db.cnpg-system
   database: keycloak
   owner: keycloak
