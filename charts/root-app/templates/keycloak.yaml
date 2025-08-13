@@ -83,7 +83,7 @@ spec:
     
         externalDatabase:
           database: db
-          host: db-rw.cnpg-system
+          host: db-rw.cnpg-system.svc.cluster.local
           existingSecret: db-app-access
           existingSecretUserKey: username
           existingSecretPasswordKey: password
