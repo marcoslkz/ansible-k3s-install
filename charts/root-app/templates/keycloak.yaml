@@ -80,14 +80,15 @@ spec:
 
         postgresql:
           enabled: false
-    
+        
         externalDatabase:
-          database: db
           host: db-rw.cnpg-system.svc.cluster.local
+          user: keycloak
+          database: keycloak
           existingSecret: db-app-access
           existingSecretUserKey: username
           existingSecretPasswordKey: password
-          
+
         proxy: edge
         proxyHeaders: xforwarded
 
