@@ -43,6 +43,12 @@ spec:
       secret:
         name: db-app-access
 
+  managed:
+    roles:
+      - name: keycloak_user
+        ensure: present
+        login: true
+        superuser: false
   #backup:
   #  volume:
   #    size: 2Gi
