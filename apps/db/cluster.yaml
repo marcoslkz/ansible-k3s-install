@@ -49,6 +49,8 @@ spec:
         ensure: present
         login: true
         superuser: false
+        passwordSecret:
+          name: keycloak-user-secret
   #backup:
   #  volume:
   #    size: 2Gi
