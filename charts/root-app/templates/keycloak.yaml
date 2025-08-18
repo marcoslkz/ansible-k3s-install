@@ -59,7 +59,6 @@ spec:
             traefik.ingress.kubernetes.io/router.entrypoints: websecure
     
         ingressProxy:
-          # Define que o chart adaptera URLs e cabeçalhos via Traefik
           enable: true
     
         defaultInitContainers:
@@ -83,10 +82,9 @@ spec:
         
         externalDatabase:
           host: db-rw.cnpg-system.svc.cluster.local
-          user: keycloak
+          user: keycloak_user
           database: keycloak
-          existingSecret: db-app-access
-          existingSecretUserKey: username
+          existingSecret: keycloak-user-secret
           existingSecretPasswordKey: password
 
         proxy: edge
