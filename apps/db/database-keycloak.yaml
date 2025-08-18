@@ -2,10 +2,14 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: keycloak
+  name: database-keycloak
   namespace: cnpg-system
 spec:
   cluster:
     name: db
   database: keycloak
   owner: keycloak_user
+  name: keycloak
+  extensions: 
+    - name: "uuid-ossp"
+    - name: "pgcrypto"
