@@ -9,6 +9,6 @@ spec:
     name: db
   owner: keycloak_user
   name: keycloak
-  extensions: 
-    - name: "uuid-ossp"
-    - name: "pgcrypto"
+  #extensions: 
+  #  - name: "uuid-ossp"
+  #  - name: "pgcrypto"
