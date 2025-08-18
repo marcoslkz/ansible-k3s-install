@@ -7,7 +7,6 @@ metadata:
 spec:
   cluster:
     name: db
-  database: keycloak
   owner: keycloak_user
   name: keycloak
   extensions: 
