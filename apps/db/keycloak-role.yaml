@@ -1,5 +1,5 @@
 apiVersion: postgresql.cnpg.io/v1
-kind: Role
+kind: DatabaseRole
 metadata:
   name: keycloak-role
   namespace: cnpg-system
@@ -7,6 +7,7 @@ spec:
   cluster:
     name: db
   name: keycloak_user
+  login: true
   passwordSecret:
     name: keycloak-user-secret
     key: password
