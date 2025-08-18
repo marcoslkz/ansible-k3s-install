@@ -13,7 +13,7 @@
        - url: https://github.com/cert-manager/cert-manager/releases/download/v1.18.0/cert-manager.yaml
          filename: cert-manager.yaml
     #     filename: wireguard-deployment.yaml
-       - url:   https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.26/releases/cnpg-1.26.0.yaml
+       - url:   https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.27/releases/cnpg-1.27.0.yaml
          filename: cnpg.yaml
 
   roles:
